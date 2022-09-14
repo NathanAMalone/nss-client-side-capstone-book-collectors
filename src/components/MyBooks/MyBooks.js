@@ -48,11 +48,6 @@ export const MyBooks = () => {
             },
             [ownedBooks]
         )
-        
-        const handleEditButtonClick = (event) => {
-            event.preventDefault()
-            navigate("/updateBook")
-        }
             
 
         return <>
@@ -62,33 +57,36 @@ export const MyBooks = () => {
         {/* // Book Title: booksOwned.bookName, Actual Author: booksOwned.bookAuthor, User's Thoughts: booksOwned.bookThoughts, Year of Publication: booksOwned.book.publicationDate, Dustjacket: if booksOwned.dustJacket true, yes; else no */}
                 
                 {
-                    filteredOwnedBooks.map((filteredOwnedBook) => {
-                        return <section className="ownedBook" key={`ownedBook--${filteredOwnedBook.id}`}>
-                            <header className="ownedBookHeader">
-                                Book Series: {/*{bookSeriesNames.map((bookSeriesName) => {
-                                    if(bookSeriesName.id === filteredOwnedBook.book.bookSeriesNameIed)
-                                        return ({bookSeriesName.bookSeries})
-                                })} */}
-                            </header>
-                            <section>
-                                Book Title: {filteredOwnedBook.book.bookName}
-                                Actual Author: {filteredOwnedBook.book.bookAuthor}
-                                Your Toughts: {filteredOwnedBook.bookThoughts}
-                                Year of Publication: {filteredOwnedBook.book.bookAuthor}
-                                Dustjacket: {filteredOwnedBook.dustJacket?"Yes":"No"}
-                            </section>
-                            <button 
-                onClick={(clickEvent) => handleEditButtonClick(clickEvent)}
-                className="btn btn-primary">
-                Edit Book Thoughts
-            </button>
+                    filteredOwnedBooks.map(
+                        (filteredOwnedBook) => {
+                            return bookSeriesNames.map(
+                                (bookSeriesName) => {
+                                    if(bookSeriesName.id === filteredOwnedBook.book.bookSeriesNameId){
+                                        return <section className="ownedBook" key={`ownedBook--${filteredOwnedBook.id}`}>
+                                                <header className="ownedBookHeader">
+                                                    Book Series: {bookSeriesName.bookSeries}
+                                                    
+                                                </header>
+                                                <section>
+                                                    Book Title: {filteredOwnedBook.book.bookName}
+                                                    Actual Author: {filteredOwnedBook.book.bookAuthor}
+                                                    Your Toughts: {filteredOwnedBook.bookThoughts}
+                                                    Year of Publication: {filteredOwnedBook.book.publicationDate}
+                                                    Dustjacket: {filteredOwnedBook.dustJacket?"Yes":"No"}
+                                                </section>
+                                                <button onClick={
+                                                    () => navigate(`/updateBook/${filteredOwnedBook.id}`)}
+                                                className="btn btn-primary">
+                                                    Edit Book
+                                                </button>
 
-                    </section>
-                    })
+                                            </section>
+                                    }
+                                }
+                            )
+                        }
+                    )
                 }
-                 
-
-
             </article>
         </>
 }

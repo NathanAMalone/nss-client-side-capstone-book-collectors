@@ -1,4 +1,5 @@
 import { Outlet, Route, Routes } from "react-router-dom"
+import { EditBooks } from "../EditBooks/EditBooks"
 import { MyBooks } from "../MyBooks/MyBooks"
 
 
@@ -15,7 +16,7 @@ export const ApplicationViews = () => {
 				</>
 			}>
 				<Route path="myBooks" element={ <MyBooks />  } />
-				<Route path="updateBook" element={ <></>  } />
+				<Route path="/updateBook/:ownedBookId" element={ <EditBooks />  } />
 
 
 
