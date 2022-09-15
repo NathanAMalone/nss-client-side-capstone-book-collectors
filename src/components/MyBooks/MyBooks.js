@@ -67,7 +67,7 @@ export const MyBooks = () => {
         // }    
 
         return <>
-        <h2>Your Books</h2>
+        <h2>{bookUserObject.fullName}'s Books</h2>
             <article className="ownedBooks">
         {/* // if booksOwned.book.bookSeriesId === bookSeries.id, then Book Series: bookSeries.bookSeries */}
         {/* // Book Title: booksOwned.bookName, Actual Author: booksOwned.bookAuthor, User's Thoughts: booksOwned.bookThoughts, Year of Publication: booksOwned.book.publicationDate, Dustjacket: if booksOwned.dustJacket true, yes; else no */}
@@ -96,7 +96,9 @@ export const MyBooks = () => {
                                                     Edit Book
                                                 </button>
                                                 <button 
-                                                    onClick={(clickEvnt) => fetch(
+                                                    onClick={(
+
+                                                    ) => fetch(
                                                         `http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
                                                             method: "DELETE",
                                                         })

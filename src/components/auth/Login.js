@@ -17,7 +17,8 @@ export const Login = () => {
                     const user = foundUsers[0]
                     localStorage.setItem("book_user", JSON.stringify({
                         id: user.id,
-                        admin: user.isAdmin
+                        isAdmin: user.isAdmin,
+                        fullName: user.fullName
                     }))
 
                     navigate("/")
