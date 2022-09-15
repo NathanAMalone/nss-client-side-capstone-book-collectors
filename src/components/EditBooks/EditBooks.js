@@ -49,43 +49,45 @@ export const EditBooks = () => {
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
 
-    const ownedBooksToSendToAPI = {
-        bookThoughts: ownedBookData.bookThoughts,
-        dustJacket: ownedBookData.dustJacket,
-        bookId: ownedBookData.bookId,
-        userId: ownedBookData.userId,
-        ableToLoan: false,
-        isClaimed: false,
-        bookImage: ""
-    }
+        const ownedBooksToSendToAPI = {
+            bookThoughts: ownedBookData.bookThoughts,
+            dustJacket: ownedBookData.dustJacket,
+            bookId: ownedBookData.bookId,
+            userId: ownedBookData.userId,
+            ableToLoan: false,
+            isClaimed: false,
+            bookImage: ""
+        }
 
-    const booksToSendToAPI = {
-        bookSeriesNameId: bookSeriesId,
-        bookName: ownedBookData.book.bookName,
-        bookAuthor: ownedBookData.book.bookAuthor,
-        publicationDate: ownedBookData.book.publicationDate
-    }
+        const booksToSendToAPI = {
+            bookSeriesNameId: bookSeriesId,
+            bookName: ownedBookData.book.bookName,
+            bookAuthor: ownedBookData.book.bookAuthor,
+            publicationDate: ownedBookData.book.publicationDate
+        }
 
-    fetch(`http://localhost:8088/books/${ownedBookData.book.id}`, {
-        method: "PUT",
-        headers: {
-            "Content-type": "application/json"
-        },
-        body: JSON.stringify(booksToSendToAPI)
-    })
-        .then(response => response.json())
-            return fetch(`http://localhost:8088/ownedBooks/${ownedBookData.id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-type": "application/json"
-                },
-                body: JSON.stringify(ownedBooksToSendToAPI)
-            })
-                .then(response => response.json())
-                .then(() => {
-                    navigate("/myBooks")
+        fetch(`http://localhost:8088/books/${ownedBookData.book.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(booksToSendToAPI)
+        })
+            .then(response => response.json())
+                return fetch(`http://localhost:8088/ownedBooks/${ownedBookData.id}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-type": "application/json"
+                    },
+                    body: JSON.stringify(ownedBooksToSendToAPI)
                 })
+                    .then(response => response.json())
+                    .then(() => {
+                        navigate("/myBooks")
+                    })
     }
+
+    
 // build form to update BookSeries, title, author, user's thoughts, year of publication, dustjacket
 //on save button click, PUT into owned books, then PUT into books
 
@@ -174,7 +176,7 @@ export const EditBooks = () => {
                         onChange={
                             (evt) => {
                                 const copy = {...ownedBookData}
-                                copy.book.publicationDate = evt.target.value
+                                copy.book.publicationDate = parseInt(evt.target.value)
                                 updateOwnedBookData(copy)
                             }
                         }

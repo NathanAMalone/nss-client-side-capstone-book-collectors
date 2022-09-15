@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 
 export const MyBooks = () => {
@@ -13,6 +13,13 @@ export const MyBooks = () => {
         const bookUserObject = JSON.parse(localBookUser)
         const navigate = useNavigate()
 
+    const getOwnedBooks = () => {
+        fetch(`http://localhost:8088/ownedBooks?_expand=book`)
+            .then(response => response.json())
+            .then((ownedBooksArray) => {
+                setOwnedBooks(ownedBooksArray)
+            })
+    }
         useEffect(
             () => {
                 fetch(`http://localhost:8088/ownedBooks?_expand=book`)
@@ -22,7 +29,7 @@ export const MyBooks = () => {
                 })
             },
             []
-        )
+            )
         
         
         //fetch bookSeries
@@ -48,7 +55,15 @@ export const MyBooks = () => {
             },
             [ownedBooks]
         )
-            
+        
+        const deleteButton = () => {
+                return fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBooks.id}`, {
+                    method: "DELETE",
+                })
+                .then(() => {
+                    getOwnedBooks()
+                })
+        }    
 
         return <>
         <h2>Your Books</h2>
@@ -79,7 +94,18 @@ export const MyBooks = () => {
                                                 className="btn btn-primary">
                                                     Edit Book
                                                 </button>
-
+                                                <button 
+                                                    onClick={(clickEvnt) => fetch(
+                                                        `http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
+                                                            method: "DELETE",
+                                                        })
+                                                        .then(() => {
+                                                            getOwnedBooks()
+                                                        })
+                                                    }
+                                                    className="btn btn-primary">
+                                                    Delete Book
+                                                </button>
                                             </section>
                                     }
                                 }
