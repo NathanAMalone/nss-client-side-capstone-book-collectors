@@ -71,12 +71,16 @@ export const AddBook = () => {
                 bookAuthor: book.bookAuthor,
                 publicationDate: book.publicationDate
             }
-        arrayBooks.includes((arrayBook) => {
+        const foundBook = arrayBooks.find((arrayBook) => {
             if(arrayBook.bookSeriesNameId === bookSeriesId &&
                arrayBook.bookName === book.bookName &&
                arrayBook.bookAuthor === book.bookAuthor &&
                arrayBook.publicationDate === book.publicationDate) {
-                ownedBookToSendToAPI.bookId = arrayBook.id
+                return true
+               }
+        })
+            if (foundBook) {
+                ownedBookToSendToAPI.bookId = foundBook.id
                     return fetch(`http://localhost:8088/ownedBooks/`, {
                             method: "POST",
                             headers: {
@@ -113,7 +117,8 @@ export const AddBook = () => {
                         })
 
                }
-        })
+            
+        
         }
 
     // create form for new book added

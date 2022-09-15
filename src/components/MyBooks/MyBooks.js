@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import "./MyBooks.css"
 
 
 export const MyBooks = () => {
@@ -56,14 +57,14 @@ export const MyBooks = () => {
             [ownedBooks]
         )
         
-        const deleteButton = () => {
-                return fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBooks.id}`, {
-                    method: "DELETE",
-                })
-                .then(() => {
-                    getOwnedBooks()
-                })
-        }    
+        // const deleteButton = () => {
+        //         return fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
+        //             method: "DELETE",
+        //         })
+        //         .then(() => {
+        //             getOwnedBooks()
+        //         })
+        // }    
 
         return <>
         <h2>Your Books</h2>
