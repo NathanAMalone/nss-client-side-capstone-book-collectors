@@ -46,34 +46,56 @@ export const EditBooks = () => {
         []
     )
 
+    // document.addEventListener(
+    //     "click",
+    //     (clickEvent) => {
+    //         const itemClicked = clickEvent.target
+    //         if (itemClicked.id.startsWith("saveButton")) {
+    
+    //             {
+    //                 if (bookSeriesId === 0) {
+    //                     window.alert(`Make sure to pick a Book Series from the dropdown menu! `)
+    //                 } 
+    //             }
+    //         }
+    //     }
+    // )
+
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
 
-        const ownedBooksToSendToAPI = {
-            bookThoughts: ownedBookData.bookThoughts,
-            dustJacket: ownedBookData.dustJacket,
-            bookId: ownedBookData.bookId,
-            userId: ownedBookData.userId,
-            ableToLoan: false,
-            isClaimed: false,
-            bookImage: ""
-        }
+        {
+            if (bookSeriesId !== 0 && 
+                ownedBookData.book.bookName !== "" &&
+                ownedBookData.book.bookAuthor !== "" &&
+                ownedBookData.book.publicationDate !== NaN &&
+                ownedBookData.book.publicationDate !== null &&
+                ownedBookData.book.publicationDate !== 0) { 
+                const ownedBooksToSendToAPI = {
+                    bookThoughts: ownedBookData.bookThoughts,
+                    dustJacket: ownedBookData.dustJacket,
+                    bookId: ownedBookData.bookId,
+                    userId: ownedBookData.userId,
+                    ableToLoan: false,
+                    isClaimed: false,
+                    bookImage: ""
+                }
+                
+                const booksToSendToAPI = {
+                    bookSeriesNameId: bookSeriesId,
+                    bookName: ownedBookData.book.bookName,
+                    bookAuthor: ownedBookData.book.bookAuthor,
+                    publicationDate: ownedBookData.book.publicationDate
+                }
 
-        const booksToSendToAPI = {
-            bookSeriesNameId: bookSeriesId,
-            bookName: ownedBookData.book.bookName,
-            bookAuthor: ownedBookData.book.bookAuthor,
-            publicationDate: ownedBookData.book.publicationDate
-        }
-
-        fetch(`http://localhost:8088/books/${ownedBookData.book.id}`, {
-            method: "PUT",
-            headers: {
-                "Content-type": "application/json"
-            },
-            body: JSON.stringify(booksToSendToAPI)
-        })
-            .then(response => response.json())
+                fetch(`http://localhost:8088/books/${ownedBookData.book.id}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-type": "application/json"
+                    },
+                    body: JSON.stringify(booksToSendToAPI)
+                })
+                .then(response => response.json())
                 return fetch(`http://localhost:8088/ownedBooks/${ownedBookData.id}`, {
                     method: "PUT",
                     headers: {
@@ -81,10 +103,14 @@ export const EditBooks = () => {
                     },
                     body: JSON.stringify(ownedBooksToSendToAPI)
                 })
-                    .then(response => response.json())
-                    .then(() => {
-                        navigate("/myBooks")
-                    })
+                .then(response => response.json())
+                .then(() => {
+                    navigate("/myBooks")
+                })
+            } else {
+                window.alert(`Make sure to pick a Book Series from the dropdown menu! `)
+            }
+        }
     }
 
     
@@ -172,6 +198,8 @@ export const EditBooks = () => {
                     <input
                         type="number"
                         className="editPublication"
+                        min="1000"
+                        max="9999"
                         value={ownedBookData.book.publicationDate}
                         onChange={
                             (evt) => {
@@ -201,7 +229,7 @@ export const EditBooks = () => {
                     />
                 </div>
             </fieldset>
-            <button 
+            <button id="saveButton"
                 onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
                 className="btn btn-primary">
                 Save Changes
