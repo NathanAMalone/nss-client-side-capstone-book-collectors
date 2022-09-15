@@ -103,7 +103,7 @@ export const EditBooks = () => {
                             setBookSeriesId(parseInt(evt.target.value))
                         }}
                     >
-                        <option value={0}>Select Series...</option>
+                        <option value={ownedBookData.book.bookSeriesNameId}>Select Series...</option>
                         {
                             bookSeriesNames.map((bookSeriesName) => {
                                 return <option value={`${bookSeriesName.id}`} key={`bookSeriesName--${bookSeriesName.id}`}>
