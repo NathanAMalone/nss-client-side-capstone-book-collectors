@@ -28,7 +28,6 @@ export const EditBooks = () => {
             fetch(`http://localhost:8088/ownedBooks/${ownedBookId}?_expand=book`)
                 .then(response => response.json())
                 .then((data) => {
-                    // const singleOwnedBook = data[0]
                     updateOwnedBookData(data)
                 })
         },
@@ -68,9 +67,10 @@ export const EditBooks = () => {
             if (bookSeriesId !== 0 && 
                 ownedBookData.book.bookName !== "" &&
                 ownedBookData.book.bookAuthor !== "" &&
-                ownedBookData.book.publicationDate !== NaN &&
-                ownedBookData.book.publicationDate !== null &&
+                ownedBookData.book.publicationDate &&
+                !isNaN(ownedBookData.book.publicationDate) &&
                 ownedBookData.book.publicationDate !== 0) { 
+                    
                 const ownedBooksToSendToAPI = {
                     bookThoughts: ownedBookData.bookThoughts,
                     dustJacket: ownedBookData.dustJacket,
@@ -108,7 +108,7 @@ export const EditBooks = () => {
                     navigate("/myBooks")
                 })
             } else {
-                window.alert(`Make sure to pick a Book Series from the dropdown menu! `)
+                window.alert(`Make sure to fill out all fields!`)
             }
         }
     }

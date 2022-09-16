@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import "./AddBook.css"
 
 export const AddBook = () => {
     
@@ -56,6 +57,15 @@ export const AddBook = () => {
         const handleSaveButtonClick = (event) => {
             event.preventDefault()
     
+        {
+            if (bookSeriesId !== 0 && 
+                book.bookName !== "" &&
+                book.bookAuthor !== "" &&
+                ownedBook.bookThoughts !== "" &&
+                book.publicationDate &&
+                !isNaN(book.publicationDate) &&
+                book.publicationDate !== 0) {  
+
             const ownedBookToSendToAPI = {
                 bookThoughts: ownedBook.bookThoughts,
                 dustJacket: ownedBook.dustJacket,
@@ -76,7 +86,7 @@ export const AddBook = () => {
                arrayBook.bookName === book.bookName &&
                arrayBook.bookAuthor === book.bookAuthor &&
                arrayBook.publicationDate === book.publicationDate) {
-                return true
+                    return true
                }
         })
             if (foundBook) {
@@ -117,6 +127,10 @@ export const AddBook = () => {
                         })
 
                }
+            } else {
+                window.alert(`Make sure to fill out all fields!`)
+            }
+        }
             
         
         }
@@ -147,7 +161,7 @@ export const AddBook = () => {
             </fieldset>
             <fieldset>
                 <div className="formGroup">
-                    <label htmlFor="addBookTitle">Book Title</label>
+                    <label htmlFor="addBookTitle">Book Title: </label>
                     <input required autoFocus
                         type="text"
                         className="addTitle"
@@ -163,7 +177,7 @@ export const AddBook = () => {
             </fieldset>
             <fieldset>
                 <div className="formGroup">
-                    <label htmlFor="addAuthor">Actual Author</label>
+                    <label htmlFor="addAuthor">Actual Author: </label>
                     <input
                         type="text"
                         className="addAuthor"
@@ -179,7 +193,7 @@ export const AddBook = () => {
             </fieldset>
             <fieldset>
                 <div className="formGroup">
-                    <label htmlFor="addBookThoughts">Your Thoughts:</label>
+                    <label htmlFor="addBookThoughts">Your Thoughts: </label>
                     <input
                         type="text"
                         className="addThoughts"
@@ -195,7 +209,7 @@ export const AddBook = () => {
             </fieldset>
             <fieldset>
                 <div className="formGroup">
-                    <label htmlFor="addBookPublication">Year of Publication</label>
+                    <label htmlFor="addBookPublication">Year of Publication: </label>
                     <input
                         type="number"
                         className="addPublication"

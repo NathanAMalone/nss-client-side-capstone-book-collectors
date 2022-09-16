@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react"
-import { Members } from "../Members/Members"
+import { useState } from "react"
+import "./NewMember.css"
 
 export const NewMember = () => {
     // create an initial state objects with correct default properties
@@ -11,7 +11,11 @@ export const NewMember = () => {
         userAddress: "",
         isAdmin: false,
     })
-    const today = new Date()
+    const newDate = new Date()
+    const month = newDate.getUTCMonth() +1
+    const date = newDate.getUTCDate()
+    const year = newDate.getUTCFullYear()
+    const today = month + "-" + date + "-" + year
     // get array of all books; get all series names and set id in variable
 
     const navigate = useNavigate()

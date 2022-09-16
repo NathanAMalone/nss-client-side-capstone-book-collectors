@@ -1,6 +1,7 @@
 import { Outlet, Route, Routes } from "react-router-dom"
 import { AddBook } from "../AddBook/AddBook"
 import { EditBooks } from "../EditBooks/EditBooks"
+import { MemberBooks } from "../Members/memberBooks"
 import { Members } from "../Members/Members"
 import { MyBooks } from "../MyBooks/MyBooks"
 
@@ -18,9 +19,11 @@ export const CustomerViews = () => {
 				</>
 			}>
 				<Route path="myBooks" element={ <MyBooks />  } />
-				<Route path="/updateBook/:ownedBookId" element={ <EditBooks />  } />
-				<Route path="/addBook" element={ <AddBook />  } />
-				<Route path="/members" element={ <Members />  } />
+				<Route path="updateBook/:ownedBookId" element={ <EditBooks />  } />
+				<Route path="addBook" element={ <AddBook />  } />
+				<Route path="members" element={ <Members />  } />
+				<Route path="memberBooks/:userId" element={ <MemberBooks />  } />
+
 				
 
 
