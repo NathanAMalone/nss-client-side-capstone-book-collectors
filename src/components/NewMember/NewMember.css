@@ -1,0 +1,12 @@
+.newMemberForm {
+    border: 7px ridge lawngreen;
+    border-radius: 2.5rem;
+    padding: 5rem;
+    margin-top: 5rem;
+    max-width: min-content;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50rem;
+}

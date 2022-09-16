@@ -83,32 +83,34 @@ export const MyBooks = () => {
                                                     Book Series: {bookSeriesName.bookSeries}
                                                     
                                                 </header>
-                                                <section>
-                                                    Book Title: {filteredOwnedBook.book.bookName}
-                                                    Actual Author: {filteredOwnedBook.book.bookAuthor}
-                                                    Your Toughts: {filteredOwnedBook.bookThoughts}
-                                                    Year of Publication: {filteredOwnedBook.book.publicationDate}
-                                                    Dustjacket: {filteredOwnedBook.dustJacket?"Yes":"No"}
+                                                <section className="cardDetails">
+                                                    <div className="cardDiv">Book Title: {filteredOwnedBook.book.bookName}</div>
+                                                    <div className="cardDiv">Actual Author: {filteredOwnedBook.book.bookAuthor}</div>
+                                                    <div className="cardDiv">Your Toughts: {filteredOwnedBook.bookThoughts}</div>
+                                                    <div className="cardDiv">Year of Publication: {filteredOwnedBook.book.publicationDate}</div>
+                                                    <div className="cardDiv">Dustjacket: {filteredOwnedBook.dustJacket?"Yes":"No"}</div>
                                                 </section>
-                                                <button onClick={
-                                                    () => navigate(`/updateBook/${filteredOwnedBook.id}`)}
-                                                className="btn btn-primary">
-                                                    Edit Book
-                                                </button>
-                                                <button 
-                                                    onClick={(
-
-                                                    ) => fetch(
-                                                        `http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
-                                                            method: "DELETE",
-                                                        })
-                                                        .then(() => {
-                                                            getOwnedBooks()
-                                                        })
-                                                    }
+                                                <footer className="cardButtons">
+                                                    <button onClick={
+                                                        () => navigate(`/updateBook/${filteredOwnedBook.id}`)}
                                                     className="btn btn-primary">
-                                                    Delete Book
-                                                </button>
+                                                        Edit Book
+                                                    </button>
+                                                    <button 
+                                                        onClick={(
+
+                                                        ) => fetch(
+                                                            `http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
+                                                                method: "DELETE",
+                                                            })
+                                                            .then(() => {
+                                                                getOwnedBooks()
+                                                            })
+                                                        }
+                                                        className="btn btn-primary">
+                                                        Delete Book
+                                                    </button>
+                                                </footer>
                                             </section>
                                     }
                                 }

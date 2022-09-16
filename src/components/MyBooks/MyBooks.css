@@ -1,24 +1,44 @@
 .ownedBooks {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    max-width: 50%;
+    
 }
 
 .ownedBook {
     
-    border: 2px dotted fuchsia;
+    border: 8px double rgb(0, 0, 185);
     color: black;
     padding: 0.5rem;
     margin: 0.5rem;
+    display: flex;
+    flex-direction: column;
 }
 
-.employee_footer {
+.cardDetails {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: lightblue;
+    padding: 1em;
+    
+    
+}
+
+.cardDiv {
+    padding: .25rem;
+}
+.cardButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     margin: 1rem 0 0.25rem 0;
-    font-style: oblique; 
+    
 }
 
-.employee_header {
+.ownedBookHeader {
     font-size: larger;
     font-weight: 700;
     line-height: 3rem;
