@@ -115,26 +115,51 @@ const toggleAbleToLoan = () => {
                                         </section>
                                         <footer className="cardButtons">
                                             <button 
-                                                onClick={() => { 
+                                                onClick={() => {
+                                                    if(filteredOwnedBook.ableToLoan === ableToLoan){
+                                                        const keyAbleToLoan = !ableToLoan
                                                     setAbleToLoan(!ableToLoan)
                                                     const ownedBookToSendtoAPI = 
-                                                    {
-                                                        bookThoughts: filteredOwnedBook.bookThoughts,
-                                                        dustJacket: filteredOwnedBook.dustJacket,
-                                                        bookId: filteredOwnedBook.bookId,
-                                                        userId: filteredOwnedBook.userId,
-                                                        ableToLoan: ableToLoan,
-                                                        isClaimed: filteredOwnedBook.isClaimed,
-                                                        bookImage: filteredOwnedBook.bookImage
+                                                        {
+                                                            bookThoughts: filteredOwnedBook.bookThoughts,
+                                                            dustJacket: filteredOwnedBook.dustJacket,
+                                                            bookId: filteredOwnedBook.bookId,
+                                                            userId: filteredOwnedBook.userId,
+                                                            ableToLoan: keyAbleToLoan,
+                                                            isClaimed: filteredOwnedBook.isClaimed,
+                                                            bookImage: filteredOwnedBook.bookImage
+                                                        }
+                                                        fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
+                                                            method: "PUT",
+                                                            headers: {
+                                                                "Content-type": "application/json"
+                                                            },
+                                                            body: JSON.stringify(ownedBookToSendtoAPI)
+                                                        })
+                                                        .then(() => {getFilteredBooks()})
                                                     }
-                                                    fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
-                                                                method: "PUT",
-                                                                headers: {
-                                                                    "Content-type": "application/json"
-                                                                },
-                                                                body: JSON.stringify(ownedBookToSendtoAPI)
-                                                            })
-                                                            .then(() => {getFilteredBooks()})
+                                                    else {
+                                                        const keyAbleToLoan = ableToLoan
+                                                        setAbleToLoan(!ableToLoan)
+                                                        const ownedBookToSendtoAPI = 
+                                                        {
+                                                            bookThoughts: filteredOwnedBook.bookThoughts,
+                                                            dustJacket: filteredOwnedBook.dustJacket,
+                                                            bookId: filteredOwnedBook.bookId,
+                                                            userId: filteredOwnedBook.userId,
+                                                            ableToLoan: keyAbleToLoan,
+                                                            isClaimed: filteredOwnedBook.isClaimed,
+                                                            bookImage: filteredOwnedBook.bookImage
+                                                        }
+                                                        fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
+                                                            method: "PUT",
+                                                            headers: {
+                                                                "Content-type": "application/json"
+                                                            },
+                                                            body: JSON.stringify(ownedBookToSendtoAPI)
+                                                        })
+                                                        .then(() => {getFilteredBooks()})
+                                                    }
                                                 }}
                                                 className="btn btn-primary">
                                                 {!filteredOwnedBook.ableToLoan
