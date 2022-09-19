@@ -1,5 +1,5 @@
-import { CustomerViews } from "./CustomerViews"
-import { EmployeeViews } from "./EmployeeViews"
+import { MemberViews } from "./MemberViews"
+import { AdminViews } from "./AdminViews"
 
 export const ApplicationViews = () => {
 	
@@ -8,10 +8,10 @@ export const ApplicationViews = () => {
 	
 	if (bookUserObject.isAdmin) {
 		// Return employee views
-		return <EmployeeViews />
+		return <AdminViews />
 	}
 	else {
 		//Return customer views
-		return <CustomerViews />
+		return <MemberViews />
 	}
 }

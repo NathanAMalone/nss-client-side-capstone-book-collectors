@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom"
 import "./NavBar.css"
 
-export const EmployeeNav = () => {
+export const MemberNav = () => {
     const navigate = useNavigate()
 
     return (
@@ -14,9 +14,6 @@ export const EmployeeNav = () => {
             </li>
             <li className="navbar__item active">
                 <Link className="navbar__link" to="/members">Members</Link>
-            </li>
-            <li className="navbar__item active">
-                <Link className="navbar__link" to="/newMember">New Member</Link>
             </li>
             <li className="navbar__item active">
                 <Link className="navbar__link" to="/bayportBazaar">Bayport Bazaar</Link>

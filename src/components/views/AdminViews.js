@@ -10,7 +10,7 @@ import { NewMember } from "../NewMember/NewMember"
 
 
 
-export const EmployeeViews = () => {
+export const AdminViews = () => {
 	return (
 		<Routes>
 			<Route path="/" element={

@@ -114,59 +114,164 @@ const toggleAbleToLoan = () => {
                                             <div className="cardDiv">Dustjacket: {filteredOwnedBook.dustJacket ? "Yes" : "No"}</div>
                                         </section>
                                         <footer className="cardButtons">
-                                            <button 
-                                                onClick={() => {
-                                                    if(filteredOwnedBook.ableToLoan === ableToLoan){
-                                                        const keyAbleToLoan = !ableToLoan
-                                                    setAbleToLoan(!ableToLoan)
-                                                    const ownedBookToSendtoAPI = 
-                                                        {
-                                                            bookThoughts: filteredOwnedBook.bookThoughts,
-                                                            dustJacket: filteredOwnedBook.dustJacket,
-                                                            bookId: filteredOwnedBook.bookId,
-                                                            userId: filteredOwnedBook.userId,
-                                                            ableToLoan: keyAbleToLoan,
-                                                            isClaimed: filteredOwnedBook.isClaimed,
-                                                            bookImage: filteredOwnedBook.bookImage
-                                                        }
-                                                        fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
+                                            {
+                                                filteredOwnedBook.approved
+                                                ?<><div>`{filteredOwnedBook.borrowerName} has your book.`</div>
+                                                <div>Has the book been returned?    
+                                                    <button
+                                                        onClick={() => {
+                                                            const approvalToSendToAPI = 
+                                                            {
+                                                                "bookThoughts": filteredOwnedBook.bookThoughts,
+                                                                "dustJacket": filteredOwnedBook.dustJacket,
+                                                                "bookId": filteredOwnedBook.bookId,
+                                                                "userId": filteredOwnedBook.userId,
+                                                                "ableToLoan": true,
+                                                                "isClaimed": false,
+                                                                "bookImage": "",
+                                                                "borrowerName": "",
+                                                                "approved": false
+                                                            }
+                                                            fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
                                                             method: "PUT",
                                                             headers: {
                                                                 "Content-type": "application/json"
                                                             },
-                                                            body: JSON.stringify(ownedBookToSendtoAPI)
-                                                        })
-                                                        .then(() => {getFilteredBooks()})
-                                                    }
-                                                    else {
-                                                        const keyAbleToLoan = ableToLoan
-                                                        setAbleToLoan(!ableToLoan)
-                                                        const ownedBookToSendtoAPI = 
+                                                                body: JSON.stringify(approvalToSendToAPI)
+                                                            })
+                                                                .then(() => { getFilteredBooks() })
+                                                        }}
+                                                    >
+                                                        Book has been returned.
+                                                    </button>
+                                                </div></>
+                                                :<>{
+                                                    !filteredOwnedBook.isClaimed
+                                                    ?<>
+                                                    <div className="loanMessage">
                                                         {
-                                                            bookThoughts: filteredOwnedBook.bookThoughts,
-                                                            dustJacket: filteredOwnedBook.dustJacket,
-                                                            bookId: filteredOwnedBook.bookId,
-                                                            userId: filteredOwnedBook.userId,
-                                                            ableToLoan: keyAbleToLoan,
-                                                            isClaimed: filteredOwnedBook.isClaimed,
-                                                            bookImage: filteredOwnedBook.bookImage
+                                                            filteredOwnedBook.ableToLoan
+                                                            ?"Your book can be shared."
+                                                            :"This book will not be shared."
                                                         }
-                                                        fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
+                                                    </div>
+                                                    <button 
+                                                        onClick={() => {
+                                                            if(filteredOwnedBook.ableToLoan === ableToLoan){
+                                                                const keyAbleToLoan = !ableToLoan
+                                                            setAbleToLoan(!ableToLoan)
+                                                            const ownedBookToSendtoAPI = 
+                                                                {
+                                                                    bookThoughts: filteredOwnedBook.bookThoughts,
+                                                                    dustJacket: filteredOwnedBook.dustJacket,
+                                                                    bookId: filteredOwnedBook.bookId,
+                                                                    userId: filteredOwnedBook.userId,
+                                                                    ableToLoan: keyAbleToLoan,
+                                                                    isClaimed: filteredOwnedBook.isClaimed,
+                                                                    bookImage: filteredOwnedBook.bookImage,
+                                                                    borrowerName: filteredOwnedBook.borrowerName,
+                                                                    approved: filteredOwnedBook.approved
+                                                                }
+                                                                fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
+                                                                    method: "PUT",
+                                                                    headers: {
+                                                                        "Content-type": "application/json"
+                                                                    },
+                                                                    body: JSON.stringify(ownedBookToSendtoAPI)
+                                                                })
+                                                                .then(() => {getFilteredBooks()})
+                                                            }
+                                                            else {
+                                                                const keyAbleToLoan = ableToLoan
+                                                                setAbleToLoan(!ableToLoan)
+                                                                const ownedBookToSendtoAPI = 
+                                                                {
+                                                                    bookThoughts: filteredOwnedBook.bookThoughts,
+                                                                    dustJacket: filteredOwnedBook.dustJacket,
+                                                                    bookId: filteredOwnedBook.bookId,
+                                                                    userId: filteredOwnedBook.userId,
+                                                                    ableToLoan: keyAbleToLoan,
+                                                                    isClaimed: filteredOwnedBook.isClaimed,
+                                                                    bookImage: filteredOwnedBook.bookImage,
+                                                                    borrowerName: filteredOwnedBook.borrowerName,
+                                                                    approved: filteredOwnedBook.approved
+                                                                }
+                                                                fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
+                                                                    method: "PUT",
+                                                                    headers: {
+                                                                        "Content-type": "application/json"
+                                                                    },
+                                                                    body: JSON.stringify(ownedBookToSendtoAPI)
+                                                                })
+                                                                .then(() => {getFilteredBooks()})
+                                                            }
+                                                        }}
+                                                        className="btn btn-primary">
+                                                        {!filteredOwnedBook.ableToLoan
+                                                            ? "Loan Book"
+                                                            : "Do Not Loan Book"
+                                                        }
+                                                    </button>
+                                                    </>
+                                                    :<>
+                                                    <div>Accept borrow request from {filteredOwnedBook.borrowerName}?</div>
+                                                    <button
+                                                        onClick={() => {
+                                                            const approvalToSendToAPI = 
+                                                            {
+                                                                "bookThoughts": filteredOwnedBook.bookThoughts,
+                                                                "dustJacket": filteredOwnedBook.dustJacket,
+                                                                "bookId": filteredOwnedBook.bookId,
+                                                                "userId": filteredOwnedBook.userId,
+                                                                "ableToLoan": false,
+                                                                "isClaimed": true,
+                                                                "bookImage": "",
+                                                                "borrowerName": filteredOwnedBook.borrowerName,
+                                                                "approved": true
+                                                            }
+                                                            fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
                                                             method: "PUT",
                                                             headers: {
                                                                 "Content-type": "application/json"
                                                             },
-                                                            body: JSON.stringify(ownedBookToSendtoAPI)
-                                                        })
-                                                        .then(() => {getFilteredBooks()})
-                                                    }
-                                                }}
-                                                className="btn btn-primary">
-                                                {!filteredOwnedBook.ableToLoan
-                                                    ? "Loan Book"
-                                                    : "Do Not Loan Book"
-                                                }
-                                            </button>
+                                                            body: JSON.stringify(approvalToSendToAPI)
+                                                            })
+                                                                .then(() => { getFilteredBooks() })
+                                                        }}
+                                                        className="btn btn-primary"
+                                                        >
+                                                        Accept
+                                                    </button>
+                                                    <button
+                                                        onClick={() => {
+                                                            const approvalToSendToAPI = 
+                                                            {
+                                                                "bookThoughts": filteredOwnedBook.bookThoughts,
+                                                                "dustJacket": filteredOwnedBook.dustJacket,
+                                                                "bookId": filteredOwnedBook.bookId,
+                                                                "userId": filteredOwnedBook.userId,
+                                                                "ableToLoan": true,
+                                                                "isClaimed": false,
+                                                                "bookImage": "",
+                                                                "borrowerName": "",
+                                                                "approved": false
+                                                            }
+                                                            fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
+                                                            method: "PUT",
+                                                            headers: {
+                                                                "Content-type": "application/json"
+                                                            },
+                                                                body: JSON.stringify(approvalToSendToAPI)
+                                                            })
+                                                                .then(() => { getFilteredBooks() })
+                                                        }}
+                                                        className="btn btn-primary"
+                                                    >
+                                                        Reject
+                                                    </button>
+                                                    </>
+                                                }</>
+                                            }
                                         </footer>
                                     </section>
                                 }
