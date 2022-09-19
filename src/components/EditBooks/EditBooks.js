@@ -77,8 +77,15 @@ export const EditBooks = () => {
                     bookId: ownedBookData.bookId,
                     userId: ownedBookData.userId,
                     ableToLoan: false,
+                    ableToLoanDate: ownedBookData.ableToLoanDate,
                     isClaimed: false,
-                    bookImage: ""
+                    isClaimedDate: ownedBookData.isClaimedDate,
+                    bookImage: "",
+                    borrowerName: ownedBookData.borrowerName,
+                    approved: ownedBookData.approved,
+                    approvedDate: ownedBookData.approvedDate,
+                    returnedDate: ownedBookData.returnedDate,
+                    prevBorrowerName: ownedBookData.prevBorrowerName
                 }
                 
                 const booksToSendToAPI = {
@@ -132,7 +139,10 @@ export const EditBooks = () => {
                         <option value={ownedBookData.book.bookSeriesNameId}>Select Series...</option>
                         {
                             bookSeriesNames.map((bookSeriesName) => {
-                                return <option value={`${bookSeriesName.id}`} key={`bookSeriesName--${bookSeriesName.id}`}>
+                                return <option
+                                    value={`${bookSeriesName.id}`} 
+                                    key={`bookSeriesName--${bookSeriesName.id}`}
+                                    >
                                     {bookSeriesName.bookSeries}
                                 </option>
                             })

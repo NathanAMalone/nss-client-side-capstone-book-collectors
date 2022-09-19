@@ -17,8 +17,15 @@ export const AddBook = () => {
         bookThoughts: "",
         dustJacket: false,
         ableToLoan: false,
+        ableToLoanDate: "",
         isClaimed: false,
-        bookImage: ""
+        isClaimedDate: "",
+        bookImage: "",
+        borrowerName: "",
+        approved: false,
+        approvedDate: "",
+        returnedDate: "",
+        prevBorrowerName: ""
     })
     
     // get array of all books; get all series names and set id in variable
@@ -27,7 +34,13 @@ export const AddBook = () => {
     const [bookSeriesId, setBookSeriesId] = useState(0)
     const navigate = useNavigate()
     const localBookUser = localStorage.getItem("book_user")
-        const bookUserObject = JSON.parse(localBookUser)
+    const bookUserObject = JSON.parse(localBookUser)
+
+    const newDate = new Date()
+    const month = newDate.getUTCMonth() +1
+    const date = newDate.getUTCDate()
+    const year = newDate.getUTCFullYear()
+    const today = month + "-" + date + "-" + year
 
     useEffect (() => {
         fetch(`http://localhost:8088/books`)
@@ -71,8 +84,15 @@ export const AddBook = () => {
                 dustJacket: ownedBook.dustJacket,
                 userId: bookUserObject.id,
                 ableToLoan: false,
+                ableToLoanDate: today,
                 isClaimed: false,
-                bookImage: ""
+                isClaimedDate: ownedBook.isClaimedDate,
+                bookImage: ownedBook.bookImage,
+                borrowerName: ownedBook.borrowerName,
+                approved: ownedBook.approved,
+                approvedDate: ownedBook.approvedDate,
+                returnedDate: ownedBook.returnedDate,
+                prevBorrowerName: ownedBook.prevBorrowerName
             }
         
             const bookToSendToAPI = {

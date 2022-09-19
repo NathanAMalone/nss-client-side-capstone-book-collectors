@@ -1,7 +1,8 @@
 import { Outlet, Route, Routes } from "react-router-dom"
 import { AddBook } from "../AddBook/AddBook"
-import { BayportBazaar } from "../BayportBazaar/BayportBazaar"
+import { BazaarContainer } from "../BayportBazaar/BazaarContainer"
 import { LoanBooks } from "../BayportBazaar/LoanBooks"
+import { BookStatus } from "../BookStatus/BookStatus"
 import { EditBooks } from "../EditBooks/EditBooks"
 import { MemberBooks } from "../Members/memberBooks"
 import { Members } from "../Members/Members"
@@ -25,8 +26,10 @@ export const MemberViews = () => {
 				<Route path="addBook" element={ <AddBook />  } />
 				<Route path="members" element={ <Members />  } />
 				<Route path="memberBooks/:userId" element={ <MemberBooks />  } />
-				<Route path="bayportBazaar" element={ <BayportBazaar />  } />
+				<Route path="bayportBazaar" element={ <BazaarContainer />  } />
 				<Route path="loanBooks" element={ <LoanBooks />  } />
+				<Route path="bookStatus" element={ <BookStatus />  } />
+
 
 
 				

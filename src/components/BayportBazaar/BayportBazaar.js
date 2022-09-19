@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import "./BayportBazaar.css"
 
 export const BayportBazaar = () => {
 
@@ -10,6 +11,12 @@ export const BayportBazaar = () => {
 
     const localBookUser = localStorage.getItem("book_user")
     const bookUserObject = JSON.parse(localBookUser)
+
+    const newDate = new Date()
+    const month = newDate.getUTCMonth() +1
+    const date = newDate.getUTCDate()
+    const year = newDate.getUTCFullYear()
+    const today = month + "-" + date + "-" + year
 
     useEffect(() => {
         fetch(`http://localhost:8088/ownedBooks?_expand=book&_expand=user`)
@@ -57,7 +64,7 @@ export const BayportBazaar = () => {
                                     <header className="ownedBookHeader">
                                         Book Series: {bookSeriesName.bookSeries}
                                     </header>
-                                    <section className="avilableDetails">
+                                    <section className="availableDetails">
                                         <div className="cardDiv">Book Title: {ownedBook.book.bookName}</div>
                                         <div className="cardDiv">Actual Author: {ownedBook.book.bookAuthor}</div>
                                         <div className="cardDiv">Your Toughts: {ownedBook.bookThoughts}</div>
@@ -65,7 +72,7 @@ export const BayportBazaar = () => {
                                         <div className="cardDiv">Dustjacket: {ownedBook.dustJacket ? "Yes" : "No"}</div>
                                         <div className="cardDiv">Owner: {ownedBook.user.fullName}</div>
                                     </section>
-                                    <footer>
+                                    <footer className="availableButtons">
                                         {
                                             ownedBook.isClaimed
                                                 ? `${ownedBook.borrowerName} would like to borrow this book.`
@@ -73,15 +80,20 @@ export const BayportBazaar = () => {
                                                     onClick={() => {
                                                         const borrowerToSendToAPI =
                                                         {
-                                                            "bookThoughts": ownedBook.bookThoughts,
-                                                            "dustJacket": ownedBook.dustJacket,
-                                                            "bookId": ownedBook.bookId,
-                                                            "userId": ownedBook.userId,
-                                                            "ableToLoan": ownedBook.ableToLoan,
-                                                            "isClaimed": true,
-                                                            "bookImage": "",
-                                                            "borrowerName": bookUserObject.fullName,
-                                                            "approved": ownedBook.approved
+                                                            bookThoughts: ownedBook.bookThoughts,
+                                                            dustJacket: ownedBook.dustJacket,
+                                                            bookId: ownedBook.bookId,
+                                                            userId: ownedBook.userId,
+                                                            ableToLoan: ownedBook.ableToLoan,
+                                                            ableToLoanDate: ownedBook.ableToLoanDate,
+                                                            isClaimed: true,
+                                                            isClaimedDate: today, 
+                                                            bookImage: "",
+                                                            borrowerName: bookUserObject.fullName,
+                                                            approved: ownedBook.approved,
+                                                            approvedDate: ownedBook.approvedDate,
+                                                            returnedDate: ownedBook.returnedDate,
+                                                            prevBorrowerName: ownedBook.prevBorrowerName
                                                         }
                                                         
                                                     fetch(`http://localhost:8088/ownedBooks/${ownedBook.id}`, {
