@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 
 export const LoanBooks = () => {
@@ -13,6 +13,12 @@ export const LoanBooks = () => {
     const localBookUser = localStorage.getItem("book_user")
     const bookUserObject = JSON.parse(localBookUser)
     const navigate = useNavigate()
+
+    const newDate = new Date()
+    const month = newDate.getUTCMonth() +1
+    const date = newDate.getUTCDate()
+    const year = newDate.getUTCFullYear()
+    const today = month + "-" + date + "-" + year
 
     const getFilteredBooks = () => {
         fetch(`http://localhost:8088/ownedBooks?_expand=book`)
@@ -66,31 +72,9 @@ export const LoanBooks = () => {
     //         })
     // }    
 
-const toggleAbleToLoan = () => {
-
-    filteredOwnedBooks.map((filteredOwnedBook) => {
-        const ownedBookToSendtoAPI = 
-        {
-            bookThoughts: filteredOwnedBook.bookThoughts,
-            dustJacket: filteredOwnedBook.dustJacket,
-            bookId: filteredOwnedBook.bookId,
-            userId: filteredOwnedBook.userId,
-            ableToLoan: ableToLoan,
-            isClaimed: filteredOwnedBook.isClaimed,
-            bookImage: filteredOwnedBook.bookImage
-        }
-        fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
-                    method: "PUT",
-                    headers: {
-                        "Content-type": "application/json"
-                    },
-                    body: JSON.stringify(ownedBookToSendtoAPI)
-                })
-    })
-}
-
     return <>
         <h2>{bookUserObject.fullName}'s Books</h2>
+        <h3><Link to={`/bookStatus`}>See the Status of your books!</Link></h3>
         <article className="ownedBooks">
             {/* // if booksOwned.book.bookSeriesId === bookSeries.id, then Book Series: bookSeries.bookSeries */}
             {/* // Book Title: booksOwned.bookName, Actual Author: booksOwned.bookAuthor, User's Thoughts: booksOwned.bookThoughts, Year of Publication: booksOwned.book.publicationDate, Dustjacket: if booksOwned.dustJacket true, yes; else no */}
@@ -122,15 +106,20 @@ const toggleAbleToLoan = () => {
                                                         onClick={() => {
                                                             const approvalToSendToAPI = 
                                                             {
-                                                                "bookThoughts": filteredOwnedBook.bookThoughts,
-                                                                "dustJacket": filteredOwnedBook.dustJacket,
-                                                                "bookId": filteredOwnedBook.bookId,
-                                                                "userId": filteredOwnedBook.userId,
-                                                                "ableToLoan": true,
-                                                                "isClaimed": false,
-                                                                "bookImage": "",
-                                                                "borrowerName": "",
-                                                                "approved": false
+                                                                bookThoughts: filteredOwnedBook.bookThoughts,
+                                                                dustJacket: filteredOwnedBook.dustJacket,
+                                                                bookId: filteredOwnedBook.bookId,
+                                                                userId: filteredOwnedBook.userId,
+                                                                ableToLoan: true,
+                                                                ableToLoanDate: today,
+                                                                isClaimed: false,
+                                                                isClaimedDate: "",
+                                                                bookImage: "",
+                                                                borrowerName: filteredOwnedBook.borrowerName,
+                                                                approved: false,
+                                                                approvedDate: "",
+                                                                returnedDate: today,
+                                                                prevBorrowerName: filteredOwnedBook.prevBorrowerName
                                                             }
                                                             fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
                                                             method: "PUT",
@@ -141,6 +130,7 @@ const toggleAbleToLoan = () => {
                                                             })
                                                                 .then(() => { getFilteredBooks() })
                                                         }}
+                                                        className="btn btn-primary"
                                                     >
                                                         Book has been returned.
                                                     </button>
@@ -167,10 +157,15 @@ const toggleAbleToLoan = () => {
                                                                     bookId: filteredOwnedBook.bookId,
                                                                     userId: filteredOwnedBook.userId,
                                                                     ableToLoan: keyAbleToLoan,
+                                                                    ableToLoanDate: today,
                                                                     isClaimed: filteredOwnedBook.isClaimed,
+                                                                    isClaimedDate: filteredOwnedBook.isClaimedDate,
                                                                     bookImage: filteredOwnedBook.bookImage,
                                                                     borrowerName: filteredOwnedBook.borrowerName,
-                                                                    approved: filteredOwnedBook.approved
+                                                                    approved: filteredOwnedBook.approved,
+                                                                    approvedDate: filteredOwnedBook.approvedDate,
+                                                                    returnedDate: filteredOwnedBook.returnedDate,
+                                                                    prevBorrowerName: filteredOwnedBook.prevBorrowerName
                                                                 }
                                                                 fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
                                                                     method: "PUT",
@@ -191,10 +186,15 @@ const toggleAbleToLoan = () => {
                                                                     bookId: filteredOwnedBook.bookId,
                                                                     userId: filteredOwnedBook.userId,
                                                                     ableToLoan: keyAbleToLoan,
+                                                                    ableToLoanDate: today,
                                                                     isClaimed: filteredOwnedBook.isClaimed,
+                                                                    isClaimedDate: filteredOwnedBook.isClaimedDate,
                                                                     bookImage: filteredOwnedBook.bookImage,
                                                                     borrowerName: filteredOwnedBook.borrowerName,
-                                                                    approved: filteredOwnedBook.approved
+                                                                    approved: filteredOwnedBook.approved,
+                                                                    approvedDate: filteredOwnedBook.approvedDate,
+                                                                    returnedDate: filteredOwnedBook.returnedDate,
+                                                                    prevBorrowerName: filteredOwnedBook.prevBorrowerName
                                                                 }
                                                                 fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
                                                                     method: "PUT",
@@ -219,15 +219,20 @@ const toggleAbleToLoan = () => {
                                                         onClick={() => {
                                                             const approvalToSendToAPI = 
                                                             {
-                                                                "bookThoughts": filteredOwnedBook.bookThoughts,
-                                                                "dustJacket": filteredOwnedBook.dustJacket,
-                                                                "bookId": filteredOwnedBook.bookId,
-                                                                "userId": filteredOwnedBook.userId,
-                                                                "ableToLoan": false,
-                                                                "isClaimed": true,
-                                                                "bookImage": "",
-                                                                "borrowerName": filteredOwnedBook.borrowerName,
-                                                                "approved": true
+                                                                bookThoughts: filteredOwnedBook.bookThoughts,
+                                                                dustJacket: filteredOwnedBook.dustJacket,
+                                                                bookId: filteredOwnedBook.bookId,
+                                                                userId: filteredOwnedBook.userId,
+                                                                ableToLoan: false,
+                                                                ableToLoanDate: filteredOwnedBook.ableToLoanDate,
+                                                                isClaimed: true,
+                                                                isClaimedDate: filteredOwnedBook.isClaimedDate,
+                                                                bookImage: "",
+                                                                borrowerName: filteredOwnedBook.borrowerName,
+                                                                approved: true,
+                                                                approvedDate: today,
+                                                                returnedDate: "",
+                                                                prevBorrowerName: filteredOwnedBook.borrowerName
                                                             }
                                                             fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
                                                             method: "PUT",
@@ -246,15 +251,20 @@ const toggleAbleToLoan = () => {
                                                         onClick={() => {
                                                             const approvalToSendToAPI = 
                                                             {
-                                                                "bookThoughts": filteredOwnedBook.bookThoughts,
-                                                                "dustJacket": filteredOwnedBook.dustJacket,
-                                                                "bookId": filteredOwnedBook.bookId,
-                                                                "userId": filteredOwnedBook.userId,
-                                                                "ableToLoan": true,
-                                                                "isClaimed": false,
-                                                                "bookImage": "",
-                                                                "borrowerName": "",
-                                                                "approved": false
+                                                                bookThoughts: filteredOwnedBook.bookThoughts,
+                                                                dustJacket: filteredOwnedBook.dustJacket,
+                                                                bookId: filteredOwnedBook.bookId,
+                                                                userId: filteredOwnedBook.userId,
+                                                                ableToLoan: true,
+                                                                ableToLoanDate: filteredOwnedBook.ableToLoanDate,
+                                                                isClaimed: false,
+                                                                isClaimedDate: "",
+                                                                bookImage: "",
+                                                                borrowerName: "",
+                                                                approved: false,
+                                                                approvedDate: "",
+                                                                returnedDate: filteredOwnedBook.returnedDate,
+                                                                prevBorrowerName: filteredOwnedBook.prevBorrowerName
                                                             }
                                                             fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
                                                             method: "PUT",

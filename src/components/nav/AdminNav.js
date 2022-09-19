@@ -18,6 +18,9 @@ export const MemberNav = () => {
             <li className="navbar__item active">
                 <Link className="navbar__link" to="/bayportBazaar">Bayport Bazaar</Link>
             </li>
+            <li className="navbar__item active">
+                <Link className="navbar__link" to="/bookStatus">Book Status</Link>
+            </li>
             {
                 localStorage.getItem("book_user")
                     ? <li className="navbar__item navbar__logout">
