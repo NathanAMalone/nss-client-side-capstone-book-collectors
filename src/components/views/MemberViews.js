@@ -9,7 +9,7 @@ import { MyBooks } from "../MyBooks/MyBooks"
 
 
 
-export const CustomerViews = () => {
+export const MemberViews = () => {
 	return (
 		<Routes>
 			<Route path="/" element={

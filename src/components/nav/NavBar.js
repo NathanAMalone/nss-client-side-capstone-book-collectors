@@ -1,5 +1,5 @@
-import { CustomerNav } from "./CustomerNav"
-import { EmployeeNav } from "./EmployeeNav"
+import { MemberNav } from "./AdminNav"
+import { AdminNav } from "./MemberNav"
 import "./NavBar.css"
 
 export const NavBar = () => {
@@ -8,11 +8,11 @@ export const NavBar = () => {
 	
 	if (bookUserObject.isAdmin) {
 		// Return employee views
-		return <EmployeeNav />
+		return <AdminNav />
 	}
 	else {
 		//Return customer views
-		return <CustomerNav />
+		return <MemberNav />
 	}
 }
 
