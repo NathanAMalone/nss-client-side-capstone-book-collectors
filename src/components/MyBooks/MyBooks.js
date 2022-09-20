@@ -11,6 +11,7 @@ export const MyBooks = ({ searchTermState }) => {
         const [filteredOwnedBooks, setfilteredOwnedBooks] = useState([])
         // filter searched books
         const [filteredSearchedBooks, setFiltered] = useState([])
+        const [filteredSeriesNames, setFilteredNames] = useState([])
 
         const localBookUser = localStorage.getItem("book_user")
         const bookUserObject = JSON.parse(localBookUser)
@@ -73,6 +74,16 @@ export const MyBooks = ({ searchTermState }) => {
         [ searchTermState, filteredOwnedBooks ]
     )
 
+    // useEffect(
+    //     () => {
+    //         const searchedNames = bookSeriesNames.filter(bookSeriesName => {
+    //             return bookSeriesName.bookSeries.toLowerCase().match(searchTermState.toLowerCase()) 
+                
+    //         }) 
+    //         setFilteredNames(searchedNames)
+    //     },
+    //     [ searchTermState, bookSeriesNames ]
+    // )
         // const deleteButton = () => {
         //         return fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
         //             method: "DELETE",

@@ -15,7 +15,7 @@ export const NewMember = () => {
     const month = newDate.getUTCMonth() +1
     const date = newDate.getUTCDate()
     const year = newDate.getUTCFullYear()
-    const today = month + "-" + date + "-" + year
+    const today = year + "-" + month + "-" + date
     // get array of all books; get all series names and set id in variable
 
     const navigate = useNavigate()

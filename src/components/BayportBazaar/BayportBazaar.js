@@ -18,7 +18,7 @@ export const BayportBazaar = ({ searchTermState }) => {
     const month = newDate.getUTCMonth() +1
     const date = newDate.getUTCDate()
     const year = newDate.getUTCFullYear()
-    const today = month + "-" + date + "-" + year
+    const today = year + "-" + month + "-" + date
     
     useEffect(() => {
         fetch(`http://localhost:8088/ownedBooks?_expand=book&_expand=user`)

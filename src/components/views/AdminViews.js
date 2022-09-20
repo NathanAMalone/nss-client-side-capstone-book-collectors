@@ -1,5 +1,6 @@
 import { Outlet, Route, Routes } from "react-router-dom"
 import { AddBook } from "../AddBook/AddBook"
+import { AllBooksContainer } from "../AllBooks/AllBooksContainer"
 import { BazaarContainer } from "../BayportBazaar/BazaarContainer"
 import { LoanBooksContainer } from "../BayportBazaar/LoanBooksContainer"
 import { BookStatusContainer } from "../BookStatus/BookStatusContainer"
@@ -23,6 +24,7 @@ export const AdminViews = () => {
 				</>
 			}>
 				<Route path="myBooks" element={ <MyBooksContainer />  } />
+				<Route path="AllBooks" element={ <AllBooksContainer />  } />
 				<Route path="/updateBook/:ownedBookId" element={ <EditBooks />  } />
 				<Route path="/addBook" element={ <AddBook />  } />
 				<Route path="/members" element={ <MembersContainer />  } />
