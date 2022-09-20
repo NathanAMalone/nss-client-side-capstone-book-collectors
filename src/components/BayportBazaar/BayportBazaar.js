@@ -54,7 +54,7 @@ export const BayportBazaar = ({ searchTermState }) => {
         fetch(`http://localhost:8088/ownedBooks?_expand=book&_expand=user`)
         .then(response => response.json())
         .then((ownedBooksArray) => {
-            setOwnedBooks(ownedBooksArray)
+            setFiltered(ownedBooksArray)
         })
     }
         //search from BookSearch.js

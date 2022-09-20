@@ -115,6 +115,7 @@ export const MyBooks = ({ searchTermState }) => {
                                                     <div className="cardDiv">Your Toughts: {filteredSearchedBook.bookThoughts}</div>
                                                     <div className="cardDiv">Year of Publication: {filteredSearchedBook.book.publicationDate}</div>
                                                     <div className="cardDiv">Dustjacket: {filteredSearchedBook.dustJacket?"Yes":"No"}</div>
+                                                    <img className="cardImg" src={require("../bookImages/hb001bTowerTreasure.jpg")}></img>
                                                 </section>
                                                 <footer className="cardButtons">
                                                     <button onClick={

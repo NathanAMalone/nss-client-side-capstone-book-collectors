@@ -83,27 +83,6 @@ export const AllBooks = ({ searchTermState, bookSeriesId }) => {
                                                 <div className="cardDiv">Year of Publication: {filteredSearchedBook.book.publicationDate}</div>
                                                 <div className="cardDiv">Dustjacket: {filteredSearchedBook.dustJacket ? "Yes" : "No"}</div>
                                             </section>
-                                            <footer className="cardButtons">
-                                                <button onClick={
-                                                    () => navigate(`/updateBook/${filteredSearchedBook.id}`)}
-                                                    className="btn btn-primary">
-                                                    Edit Book
-                                                </button>
-                                                <button
-                                                    onClick={(
-
-                                                    ) => fetch(
-                                                        `http://localhost:8088/ownedBooks/${filteredSearchedBook.id}`, {
-                                                        method: "DELETE",
-                                                    })
-                                                        .then(() => {
-                                                            getOwnedBooks()
-                                                        })
-                                                    }
-                                                    className="btn btn-primary">
-                                                    Delete Book
-                                                </button>
-                                            </footer>
                                         </section>
                                     }
                                 }

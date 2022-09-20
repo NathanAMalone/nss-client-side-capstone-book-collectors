@@ -257,6 +257,22 @@ export const AddBook = () => {
                     />
                 </div>
             </fieldset>
+            <fieldset>
+                <div className="formGroup">
+                    <label htmlFor="addBookImage">Upload a Book Image: </label>
+                    <input
+                        type="file"
+                        name="image"
+                        className="addImage"
+                        value={ownedBook.bookImage}
+                        onChange={(evt) => {
+                            const copy = {...ownedBook}
+                            copy.bookImage = evt.target.value
+                            updateOwnedBook(copy)
+                        }}
+                    />
+                </div>
+            </fieldset>
             <button 
                 onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
                 className="btn btn-primary">
