@@ -2,12 +2,14 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import "./BayportBazaar.css"
 
-export const BayportBazaar = () => {
+export const BayportBazaar = ({ searchTermState }) => {
 
     //fetch ownedbooks with expand book and user
     //fetch bookSereiesNames
     const [ownedBooks, setOwnedBooks] = useState([])
     const [bookSeriesNames, setBookSeriesNames] = useState([])
+    // filter books to searched books
+    const [filteredOwnedBooks, setFiltered] = useState([])
 
     const localBookUser = localStorage.getItem("book_user")
     const bookUserObject = JSON.parse(localBookUser)
@@ -17,86 +19,106 @@ export const BayportBazaar = () => {
     const date = newDate.getUTCDate()
     const year = newDate.getUTCFullYear()
     const today = month + "-" + date + "-" + year
-
+    
     useEffect(() => {
         fetch(`http://localhost:8088/ownedBooks?_expand=book&_expand=user`)
-            .then(response => response.json())
-            .then((ownedBooksArray) => {
-                setOwnedBooks(ownedBooksArray)
-            })
+        .then(response => response.json())
+        .then((ownedBooksArray) => {
+            setOwnedBooks(ownedBooksArray)
+        })
     },
-        []
+    []
     )
-
+    
+    useEffect(() => {
+        fetch(`http://localhost:8088/ownedBooks?_expand=book&_expand=user`)
+        .then(response => response.json())
+        .then((ownedBooksArray) => {
+            setFiltered(ownedBooksArray)
+        })
+    },
+    []
+    )
+    
     useEffect(() => {
         fetch(`http://localhost:8088/bookSeriesNames`)
-            .then(response => response.json())
-            .then((bookSeriesArray) => {
-                setBookSeriesNames(bookSeriesArray)
-            })
+        .then(response => response.json())
+        .then((bookSeriesArray) => {
+            setBookSeriesNames(bookSeriesArray)
+        })
     },
-        []
+    []
     )
-
+    
     const getBooks = () => {
         fetch(`http://localhost:8088/ownedBooks?_expand=book&_expand=user`)
-            .then(response => response.json())
-            .then((ownedBooksArray) => {
-                setOwnedBooks(ownedBooksArray)
-            })
+        .then(response => response.json())
+        .then((ownedBooksArray) => {
+            setOwnedBooks(ownedBooksArray)
+        })
     }
+        //search from BookSearch.js
+        useEffect(
+            () => {
+                const searchedBooks = ownedBooks.filter(ownedBook => {
+                    return ownedBook.book.bookName.toLowerCase().match(searchTermState.toLowerCase()) || 
+                    ownedBook.book.bookAuthor.toLowerCase().match(searchTermState.toLowerCase()) || 
+                    ownedBook.bookThoughts.toLowerCase().match(searchTermState.toLowerCase()) ||
+                    ownedBook.book.publicationDate.toString().match(searchTermState) ||
+                    ownedBook.user.fullName.toLowerCase().match(searchTermState.toLowerCase())
+                }) 
+                setFiltered(searchedBooks)
+            },
+            [ searchTermState ]
+        )
 
 
     // link at top of page to take you to an addbooks page(similar to MyBooks, just different buttons)
     // map books if ableToLoan=true then display book
     return <>
-        <h2>Welcome to the Bayport Bazaar!</h2>
-        <h3>
-            <Link to={`/loanBooks`}>Manage your loaned books here!</Link>
-        </h3>
         <article className="bayportBazaar">
             {
-                ownedBooks.map((ownedBook) => {
-                    if (ownedBook.ableToLoan === true && ownedBook.userId !== bookUserObject.id) {
+                filteredOwnedBooks.map((filteredOwnedBook) => {
+                    if (filteredOwnedBook.ableToLoan === true && filteredOwnedBook.userId !== bookUserObject.id) {
                         return bookSeriesNames.map((bookSeriesName) => {
-                            if (bookSeriesName.id === ownedBook.book.bookSeriesNameId) {
-                                return <section className="availableBooks" key={`availableBook--${ownedBook.id}`}>
+                            if (bookSeriesName.id === filteredOwnedBook.book.bookSeriesNameId) {
+                                return <section className="availableBooks" key={`availableBook--${filteredOwnedBook.id}`}>
                                     <header className="ownedBookHeader">
                                         Book Series: {bookSeriesName.bookSeries}
                                     </header>
                                     <section className="availableDetails">
-                                        <div className="cardDiv">Book Title: {ownedBook.book.bookName}</div>
-                                        <div className="cardDiv">Actual Author: {ownedBook.book.bookAuthor}</div>
-                                        <div className="cardDiv">Your Toughts: {ownedBook.bookThoughts}</div>
-                                        <div className="cardDiv">Year of Publication: {ownedBook.book.publicationDate}</div>
-                                        <div className="cardDiv">Dustjacket: {ownedBook.dustJacket ? "Yes" : "No"}</div>
-                                        <div className="cardDiv">Owner: {ownedBook.user.fullName}</div>
+                                        <div className="cardDiv">Book Title: {filteredOwnedBook.book.bookName}</div>
+                                        <div className="cardDiv">Actual Author: {filteredOwnedBook.book.bookAuthor}</div>
+                                        <div className="cardDiv">Your Toughts: {filteredOwnedBook.bookThoughts}</div>
+                                        <div className="cardDiv">Year of Publication: {filteredOwnedBook.book.publicationDate}</div>
+                                        <div className="cardDiv">Dustjacket: {filteredOwnedBook.dustJacket ? "Yes" : "No"}</div>
+                                        <div className="cardDiv">Owner: {filteredOwnedBook.user.fullName}</div>
                                     </section>
                                     <footer className="availableButtons">
                                         {
-                                            ownedBook.isClaimed
-                                                ? `${ownedBook.borrowerName} would like to borrow this book.`
+                                            filteredOwnedBook.isClaimed
+                                                ? `${filteredOwnedBook.borrowerName} would like to borrow this book.`
                                                 : <button
                                                     onClick={() => {
                                                         const borrowerToSendToAPI =
                                                         {
-                                                            bookThoughts: ownedBook.bookThoughts,
-                                                            dustJacket: ownedBook.dustJacket,
-                                                            bookId: ownedBook.bookId,
-                                                            userId: ownedBook.userId,
-                                                            ableToLoan: ownedBook.ableToLoan,
-                                                            ableToLoanDate: ownedBook.ableToLoanDate,
+                                                            bookThoughts: filteredOwnedBook.bookThoughts,
+                                                            dustJacket: filteredOwnedBook.dustJacket,
+                                                            bookId: filteredOwnedBook.bookId,
+                                                            userId: filteredOwnedBook.userId,
+                                                            ableToLoan: filteredOwnedBook.ableToLoan,
+                                                            ableToLoanDate: filteredOwnedBook.ableToLoanDate,
                                                             isClaimed: true,
                                                             isClaimedDate: today, 
                                                             bookImage: "",
                                                             borrowerName: bookUserObject.fullName,
-                                                            approved: ownedBook.approved,
-                                                            approvedDate: ownedBook.approvedDate,
-                                                            returnedDate: ownedBook.returnedDate,
-                                                            prevBorrowerName: ownedBook.prevBorrowerName
+                                                            approved: filteredOwnedBook.approved,
+                                                            approvedDate: filteredOwnedBook.approvedDate,
+                                                            returnedDate: filteredOwnedBook.returnedDate,
+                                                            prevBorrowerName: filteredOwnedBook.prevBorrowerName
                                                         }
                                                         
-                                                    fetch(`http://localhost:8088/ownedBooks/${ownedBook.id}`, {
+                                                    fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
                                                         method: "PUT",
                                                         headers: {
                                                             "Content-type": "application/json"

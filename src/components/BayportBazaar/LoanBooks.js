@@ -2,13 +2,15 @@ import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
 
-export const LoanBooks = () => {
+export const LoanBooks = ({ searchTermState }) => {
     //user should see all of their books displayed
     //Need to fetch all booksOwned with expanded book information
     const [ownedBooks, setOwnedBooks] = useState([])
     const [bookSeriesNames, setBookSeriesNames] = useState([])
     const [filteredOwnedBooks, setfilteredOwnedBooks] = useState([])
     const [ableToLoan, setAbleToLoan] = useState(false)
+    // set filter for searched books
+    const [filteredSearchedBooks, setFiltered] = useState([])
 
     const localBookUser = localStorage.getItem("book_user")
     const bookUserObject = JSON.parse(localBookUser)
@@ -63,6 +65,21 @@ export const LoanBooks = () => {
         [ownedBooks]
     )
 
+    //search from BookSearch.js
+    useEffect(
+        () => {
+            const searchedBooks = filteredOwnedBooks.filter(filteredOwnedBook => {
+                return filteredOwnedBook.book.bookName.toLowerCase().match(searchTermState.toLowerCase()) || 
+                filteredOwnedBook.book.bookAuthor.toLowerCase().match(searchTermState.toLowerCase()) || 
+                filteredOwnedBook.bookThoughts.toLowerCase().match(searchTermState.toLowerCase()) ||
+                filteredOwnedBook.book.publicationDate.toString().match(searchTermState)
+                
+            }) 
+            setFiltered(searchedBooks)
+        },
+        [ searchTermState, filteredOwnedBooks ]
+    )
+
     // const deleteButton = () => {
     //         return fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
     //             method: "DELETE",
@@ -73,55 +90,54 @@ export const LoanBooks = () => {
     // }    
 
     return <>
-        <h2>{bookUserObject.fullName}'s Books</h2>
-        <h3><Link to={`/bookStatus`}>See the Status of your books!</Link></h3>
+       
         <article className="ownedBooks">
             {/* // if booksOwned.book.bookSeriesId === bookSeries.id, then Book Series: bookSeries.bookSeries */}
             {/* // Book Title: booksOwned.bookName, Actual Author: booksOwned.bookAuthor, User's Thoughts: booksOwned.bookThoughts, Year of Publication: booksOwned.book.publicationDate, Dustjacket: if booksOwned.dustJacket true, yes; else no */}
 
             {
-                filteredOwnedBooks.map(
-                    (filteredOwnedBook) => {
+                filteredSearchedBooks.map(
+                    (filteredSearchedBook) => {
                         return bookSeriesNames.map(
                             (bookSeriesName) => {
-                                if (bookSeriesName.id === filteredOwnedBook.book.bookSeriesNameId) {
-                                    return <section className="ownedBook" key={`ownedBook--${filteredOwnedBook.id}`}>
+                                if (bookSeriesName.id === filteredSearchedBook.book.bookSeriesNameId) {
+                                    return <section className="ownedBook" key={`ownedBook--${filteredSearchedBook.id}`}>
                                         <header className="ownedBookHeader">
                                             Book Series: {bookSeriesName.bookSeries}
 
                                         </header>
                                         <section className="cardDetails">
-                                            <div className="cardDiv">Book Title: {filteredOwnedBook.book.bookName}</div>
-                                            <div className="cardDiv">Actual Author: {filteredOwnedBook.book.bookAuthor}</div>
-                                            <div className="cardDiv">Your Toughts: {filteredOwnedBook.bookThoughts}</div>
-                                            <div className="cardDiv">Year of Publication: {filteredOwnedBook.book.publicationDate}</div>
-                                            <div className="cardDiv">Dustjacket: {filteredOwnedBook.dustJacket ? "Yes" : "No"}</div>
+                                            <div className="cardDiv">Book Title: {filteredSearchedBook.book.bookName}</div>
+                                            <div className="cardDiv">Actual Author: {filteredSearchedBook.book.bookAuthor}</div>
+                                            <div className="cardDiv">Your Toughts: {filteredSearchedBook.bookThoughts}</div>
+                                            <div className="cardDiv">Year of Publication: {filteredSearchedBook.book.publicationDate}</div>
+                                            <div className="cardDiv">Dustjacket: {filteredSearchedBook.dustJacket ? "Yes" : "No"}</div>
                                         </section>
                                         <footer className="cardButtons">
                                             {
-                                                filteredOwnedBook.approved
-                                                ?<><div>`{filteredOwnedBook.borrowerName} has your book.`</div>
+                                                filteredSearchedBook.approved
+                                                ?<><div>`{filteredSearchedBook.borrowerName} has your book.`</div>
                                                 <div>Has the book been returned?    
                                                     <button
                                                         onClick={() => {
                                                             const approvalToSendToAPI = 
                                                             {
-                                                                bookThoughts: filteredOwnedBook.bookThoughts,
-                                                                dustJacket: filteredOwnedBook.dustJacket,
-                                                                bookId: filteredOwnedBook.bookId,
-                                                                userId: filteredOwnedBook.userId,
+                                                                bookThoughts: filteredSearchedBook.bookThoughts,
+                                                                dustJacket: filteredSearchedBook.dustJacket,
+                                                                bookId: filteredSearchedBook.bookId,
+                                                                userId: filteredSearchedBook.userId,
                                                                 ableToLoan: true,
                                                                 ableToLoanDate: today,
                                                                 isClaimed: false,
                                                                 isClaimedDate: "",
                                                                 bookImage: "",
-                                                                borrowerName: filteredOwnedBook.borrowerName,
+                                                                borrowerName: filteredSearchedBook.borrowerName,
                                                                 approved: false,
                                                                 approvedDate: "",
                                                                 returnedDate: today,
-                                                                prevBorrowerName: filteredOwnedBook.prevBorrowerName
+                                                                prevBorrowerName: filteredSearchedBook.prevBorrowerName
                                                             }
-                                                            fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
+                                                            fetch(`http://localhost:8088/ownedBooks/${filteredSearchedBook.id}`, {
                                                             method: "PUT",
                                                             headers: {
                                                                 "Content-type": "application/json"
@@ -136,38 +152,38 @@ export const LoanBooks = () => {
                                                     </button>
                                                 </div></>
                                                 :<>{
-                                                    !filteredOwnedBook.isClaimed
+                                                    !filteredSearchedBook.isClaimed
                                                     ?<>
                                                     <div className="loanMessage">
                                                         {
-                                                            filteredOwnedBook.ableToLoan
+                                                            filteredSearchedBook.ableToLoan
                                                             ?"Your book can be shared."
                                                             :"This book will not be shared."
                                                         }
                                                     </div>
                                                     <button 
                                                         onClick={() => {
-                                                            if(filteredOwnedBook.ableToLoan === ableToLoan){
+                                                            if(filteredSearchedBook.ableToLoan === ableToLoan){
                                                                 const keyAbleToLoan = !ableToLoan
                                                             setAbleToLoan(!ableToLoan)
                                                             const ownedBookToSendtoAPI = 
                                                                 {
-                                                                    bookThoughts: filteredOwnedBook.bookThoughts,
-                                                                    dustJacket: filteredOwnedBook.dustJacket,
-                                                                    bookId: filteredOwnedBook.bookId,
-                                                                    userId: filteredOwnedBook.userId,
+                                                                    bookThoughts: filteredSearchedBook.bookThoughts,
+                                                                    dustJacket: filteredSearchedBook.dustJacket,
+                                                                    bookId: filteredSearchedBook.bookId,
+                                                                    userId: filteredSearchedBook.userId,
                                                                     ableToLoan: keyAbleToLoan,
                                                                     ableToLoanDate: today,
-                                                                    isClaimed: filteredOwnedBook.isClaimed,
-                                                                    isClaimedDate: filteredOwnedBook.isClaimedDate,
-                                                                    bookImage: filteredOwnedBook.bookImage,
-                                                                    borrowerName: filteredOwnedBook.borrowerName,
-                                                                    approved: filteredOwnedBook.approved,
-                                                                    approvedDate: filteredOwnedBook.approvedDate,
-                                                                    returnedDate: filteredOwnedBook.returnedDate,
-                                                                    prevBorrowerName: filteredOwnedBook.prevBorrowerName
+                                                                    isClaimed: filteredSearchedBook.isClaimed,
+                                                                    isClaimedDate: filteredSearchedBook.isClaimedDate,
+                                                                    bookImage: filteredSearchedBook.bookImage,
+                                                                    borrowerName: filteredSearchedBook.borrowerName,
+                                                                    approved: filteredSearchedBook.approved,
+                                                                    approvedDate: filteredSearchedBook.approvedDate,
+                                                                    returnedDate: filteredSearchedBook.returnedDate,
+                                                                    prevBorrowerName: filteredSearchedBook.prevBorrowerName
                                                                 }
-                                                                fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
+                                                                fetch(`http://localhost:8088/ownedBooks/${filteredSearchedBook.id}`, {
                                                                     method: "PUT",
                                                                     headers: {
                                                                         "Content-type": "application/json"
@@ -181,22 +197,22 @@ export const LoanBooks = () => {
                                                                 setAbleToLoan(!ableToLoan)
                                                                 const ownedBookToSendtoAPI = 
                                                                 {
-                                                                    bookThoughts: filteredOwnedBook.bookThoughts,
-                                                                    dustJacket: filteredOwnedBook.dustJacket,
-                                                                    bookId: filteredOwnedBook.bookId,
-                                                                    userId: filteredOwnedBook.userId,
+                                                                    bookThoughts: filteredSearchedBook.bookThoughts,
+                                                                    dustJacket: filteredSearchedBook.dustJacket,
+                                                                    bookId: filteredSearchedBook.bookId,
+                                                                    userId: filteredSearchedBook.userId,
                                                                     ableToLoan: keyAbleToLoan,
                                                                     ableToLoanDate: today,
-                                                                    isClaimed: filteredOwnedBook.isClaimed,
-                                                                    isClaimedDate: filteredOwnedBook.isClaimedDate,
-                                                                    bookImage: filteredOwnedBook.bookImage,
-                                                                    borrowerName: filteredOwnedBook.borrowerName,
-                                                                    approved: filteredOwnedBook.approved,
-                                                                    approvedDate: filteredOwnedBook.approvedDate,
-                                                                    returnedDate: filteredOwnedBook.returnedDate,
-                                                                    prevBorrowerName: filteredOwnedBook.prevBorrowerName
+                                                                    isClaimed: filteredSearchedBook.isClaimed,
+                                                                    isClaimedDate: filteredSearchedBook.isClaimedDate,
+                                                                    bookImage: filteredSearchedBook.bookImage,
+                                                                    borrowerName: filteredSearchedBook.borrowerName,
+                                                                    approved: filteredSearchedBook.approved,
+                                                                    approvedDate: filteredSearchedBook.approvedDate,
+                                                                    returnedDate: filteredSearchedBook.returnedDate,
+                                                                    prevBorrowerName: filteredSearchedBook.prevBorrowerName
                                                                 }
-                                                                fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
+                                                                fetch(`http://localhost:8088/ownedBooks/${filteredSearchedBook.id}`, {
                                                                     method: "PUT",
                                                                     headers: {
                                                                         "Content-type": "application/json"
@@ -207,34 +223,34 @@ export const LoanBooks = () => {
                                                             }
                                                         }}
                                                         className="btn btn-primary">
-                                                        {!filteredOwnedBook.ableToLoan
+                                                        {!filteredSearchedBook.ableToLoan
                                                             ? "Loan Book"
                                                             : "Do Not Loan Book"
                                                         }
                                                     </button>
                                                     </>
                                                     :<>
-                                                    <div>Accept borrow request from {filteredOwnedBook.borrowerName}?</div>
+                                                    <div>Accept borrow request from {filteredSearchedBook.borrowerName}?</div>
                                                     <button
                                                         onClick={() => {
                                                             const approvalToSendToAPI = 
                                                             {
-                                                                bookThoughts: filteredOwnedBook.bookThoughts,
-                                                                dustJacket: filteredOwnedBook.dustJacket,
-                                                                bookId: filteredOwnedBook.bookId,
-                                                                userId: filteredOwnedBook.userId,
+                                                                bookThoughts: filteredSearchedBook.bookThoughts,
+                                                                dustJacket: filteredSearchedBook.dustJacket,
+                                                                bookId: filteredSearchedBook.bookId,
+                                                                userId: filteredSearchedBook.userId,
                                                                 ableToLoan: false,
-                                                                ableToLoanDate: filteredOwnedBook.ableToLoanDate,
+                                                                ableToLoanDate: filteredSearchedBook.ableToLoanDate,
                                                                 isClaimed: true,
-                                                                isClaimedDate: filteredOwnedBook.isClaimedDate,
+                                                                isClaimedDate: filteredSearchedBook.isClaimedDate,
                                                                 bookImage: "",
-                                                                borrowerName: filteredOwnedBook.borrowerName,
+                                                                borrowerName: filteredSearchedBook.borrowerName,
                                                                 approved: true,
                                                                 approvedDate: today,
                                                                 returnedDate: "",
-                                                                prevBorrowerName: filteredOwnedBook.borrowerName
+                                                                prevBorrowerName: filteredSearchedBook.borrowerName
                                                             }
-                                                            fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
+                                                            fetch(`http://localhost:8088/ownedBooks/${filteredSearchedBook.id}`, {
                                                             method: "PUT",
                                                             headers: {
                                                                 "Content-type": "application/json"
@@ -251,22 +267,22 @@ export const LoanBooks = () => {
                                                         onClick={() => {
                                                             const approvalToSendToAPI = 
                                                             {
-                                                                bookThoughts: filteredOwnedBook.bookThoughts,
-                                                                dustJacket: filteredOwnedBook.dustJacket,
-                                                                bookId: filteredOwnedBook.bookId,
-                                                                userId: filteredOwnedBook.userId,
+                                                                bookThoughts: filteredSearchedBook.bookThoughts,
+                                                                dustJacket: filteredSearchedBook.dustJacket,
+                                                                bookId: filteredSearchedBook.bookId,
+                                                                userId: filteredSearchedBook.userId,
                                                                 ableToLoan: true,
-                                                                ableToLoanDate: filteredOwnedBook.ableToLoanDate,
+                                                                ableToLoanDate: filteredSearchedBook.ableToLoanDate,
                                                                 isClaimed: false,
                                                                 isClaimedDate: "",
                                                                 bookImage: "",
                                                                 borrowerName: "",
                                                                 approved: false,
                                                                 approvedDate: "",
-                                                                returnedDate: filteredOwnedBook.returnedDate,
-                                                                prevBorrowerName: filteredOwnedBook.prevBorrowerName
+                                                                returnedDate: filteredSearchedBook.returnedDate,
+                                                                prevBorrowerName: filteredSearchedBook.prevBorrowerName
                                                             }
-                                                            fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
+                                                            fetch(`http://localhost:8088/ownedBooks/${filteredSearchedBook.id}`, {
                                                             method: "PUT",
                                                             headers: {
                                                                 "Content-type": "application/json"
