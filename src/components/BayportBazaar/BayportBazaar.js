@@ -18,7 +18,7 @@ export const BayportBazaar = ({ searchTermState }) => {
     const month = newDate.getUTCMonth() +1
     const date = newDate.getUTCDate()
     const year = newDate.getUTCFullYear()
-    const today = month + "-" + date + "-" + year
+    const today = year + "-" + month + "-" + date
     
     useEffect(() => {
         fetch(`http://localhost:8088/ownedBooks?_expand=book&_expand=user`)
@@ -54,7 +54,7 @@ export const BayportBazaar = ({ searchTermState }) => {
         fetch(`http://localhost:8088/ownedBooks?_expand=book&_expand=user`)
         .then(response => response.json())
         .then((ownedBooksArray) => {
-            setOwnedBooks(ownedBooksArray)
+            setFiltered(ownedBooksArray)
         })
     }
         //search from BookSearch.js

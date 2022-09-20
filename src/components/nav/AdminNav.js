@@ -10,6 +10,9 @@ export const AdminNav = () => {
                 <Link className="navbar__link" to="/myBooks">My Books</Link>
             </li>
             <li className="navbar__item active">
+                <Link className="navbar__link" to="/allBooks">All Books</Link>
+            </li>
+            <li className="navbar__item active">
                 <Link className="navbar__link" to="/addBook">Add Book</Link>
             </li>
             <li className="navbar__item active">

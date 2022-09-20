@@ -40,7 +40,7 @@ export const AddBook = () => {
     const month = newDate.getUTCMonth() +1
     const date = newDate.getUTCDate()
     const year = newDate.getUTCFullYear()
-    const today = month + "-" + date + "-" + year
+    const today =  year + "-" + month + "-" + date
 
     useEffect (() => {
         fetch(`http://localhost:8088/books`)
@@ -252,6 +252,22 @@ export const AddBook = () => {
                         onChange={(evt) => {
                             const copy = {...ownedBook}
                             copy.dustJacket = evt.target.checked
+                            updateOwnedBook(copy)
+                        }}
+                    />
+                </div>
+            </fieldset>
+            <fieldset>
+                <div className="formGroup">
+                    <label htmlFor="addBookImage">Upload a Book Image: </label>
+                    <input
+                        type="file"
+                        name="image"
+                        className="addImage"
+                        value={ownedBook.bookImage}
+                        onChange={(evt) => {
+                            const copy = {...ownedBook}
+                            copy.bookImage = evt.target.value
                             updateOwnedBook(copy)
                         }}
                     />
