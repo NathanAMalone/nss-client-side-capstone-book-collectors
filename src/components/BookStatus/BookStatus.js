@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
 import "./BookStatus.css"
 
-export const BookStatus = () => {
+export const BookStatus = ({ searchTermState }) => {
     //fetch array  of owned books with expanded user and book
     // filter books to get array of only those owned by user
     // display messages of books about loan status
 
     const [ownedBooks, setOwnedBooks] = useState([])
     const [filteredOwnedBooks, setfilteredOwnedBooks] = useState([])
+    //Set filter for searched books
+    const [filteredSearchedBooks, setFiltered] = useState([])
 
     const localBookUser = localStorage.getItem("book_user")
     const bookUserObject = JSON.parse(localBookUser)
@@ -32,49 +33,64 @@ export const BookStatus = () => {
         [ownedBooks]
     )
 
+    //search from BookSearch.js
+    useEffect(
+        () => {
+            const searchedBooks = filteredOwnedBooks.filter(filteredOwnedBook => {
+                return filteredOwnedBook.book.bookName.toLowerCase().match(searchTermState.toLowerCase()) || 
+                filteredOwnedBook.ableToLoanDate.toLowerCase().match(searchTermState.toLowerCase()) || 
+                filteredOwnedBook.isClaimedDate.toLowerCase().match(searchTermState.toLowerCase()) ||
+                filteredOwnedBook.borrowerName.toLowerCase().match(searchTermState.toLowerCase()) ||
+                filteredOwnedBook.approvedDate.toLowerCase().match(searchTermState.toLowerCase()) ||
+                filteredOwnedBook.returnedDate.toLowerCase().match(searchTermState.toLowerCase()) 
+            }) 
+            setFiltered(searchedBooks)
+        },
+        [ searchTermState, filteredOwnedBooks ]
+    )
+
     return<>
-        <h2>Status Updates for {bookUserObject.fullName}</h2>
-            <h3><Link to={`/loanBooks`}>Manage your loaned books here!</Link></h3>
+       
             <article className="bookStatus">
                 {
-                    filteredOwnedBooks.map((filteredOwnedBook) => {
-                        return <section className="ownedBookStatus" key={`ownedBookStatus--${filteredOwnedBook.id}`}>
+                    filteredSearchedBooks.map((filteredSearchedBook) => {
+                        return <section className="ownedBookStatus" key={`ownedBookStatus--${filteredSearchedBook.id}`}>
                             <header className="statusHeader">
-                                {filteredOwnedBook.book.bookName}
+                                {filteredSearchedBook.book.bookName}
                             </header>
                             <section className="statusDetails">
                             {
-                                filteredOwnedBook.ableToLoan
+                                filteredSearchedBook.ableToLoan
                                 ?<div className="statusDiv">
-                                    This book has been available for loan since {filteredOwnedBook.ableToLoanDate}.
+                                    This book has been available for loan since {filteredSearchedBook.ableToLoanDate}.
                                 </div>
                                 :""
                             }
                             {
-                                (!filteredOwnedBook.ableToLoan && !filteredOwnedBook.approved)
+                                (!filteredSearchedBook.ableToLoan && !filteredSearchedBook.approved)
                                 ?<div className="statusDiv">
-                                    This book has NOT been available for loan since {filteredOwnedBook.ableToLoanDate}.
+                                    This book has NOT been available for loan since {filteredSearchedBook.ableToLoanDate}.
                                 </div>
                                 :""
                             }
                             {
-                                filteredOwnedBook.isClaimed
+                                filteredSearchedBook.isClaimed
                                 ?<div className="statusDiv">
-                                    On {filteredOwnedBook.isClaimedDate}, {filteredOwnedBook.borrowerName} asked to borrow this book.
+                                    On {filteredSearchedBook.isClaimedDate}, {filteredSearchedBook.borrowerName} asked to borrow this book.
                                 </div>
                                 :""
                             }
                             {
-                                filteredOwnedBook.approved
+                                filteredSearchedBook.approved
                                 ?<div className="statusDiv">
-                                    You lent this book to {filteredOwnedBook.borrowerName} on {filteredOwnedBook.approvedDate}. 
+                                    You lent this book to {filteredSearchedBook.borrowerName} on {filteredSearchedBook.approvedDate}. 
                                 </div>
                                 :""
                             }
                             {
-                                (filteredOwnedBook.prevBorrowerName !== "" && filteredOwnedBook.returnedDate !== "")
+                                (filteredSearchedBook.prevBorrowerName !== "" && filteredSearchedBook.returnedDate !== "")
                                 ?<div>
-                                  This book was last borrowed by {filteredOwnedBook.borrowerName} and returned on {filteredOwnedBook.returnedDate}.  
+                                  This book was last borrowed by {filteredSearchedBook.borrowerName} and returned on {filteredSearchedBook.returnedDate}.  
                                 </div>
                                 :""
                             }

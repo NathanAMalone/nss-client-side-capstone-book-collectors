@@ -1,5 +1,5 @@
-import { MemberNav } from "./AdminNav"
-import { AdminNav } from "./MemberNav"
+import { MemberNav } from "./MemberNav"
+import { AdminNav } from "./AdminNav"
 import "./NavBar.css"
 
 export const NavBar = () => {

@@ -1,12 +1,12 @@
 import { Outlet, Route, Routes } from "react-router-dom"
 import { AddBook } from "../AddBook/AddBook"
 import { BazaarContainer } from "../BayportBazaar/BazaarContainer"
-import { LoanBooks } from "../BayportBazaar/LoanBooks"
-import { BookStatus } from "../BookStatus/BookStatus"
+import { LoanBooksContainer } from "../BayportBazaar/LoanBooksContainer"
+import { BookStatusContainer } from "../BookStatus/BookStatusContainer"
 import { EditBooks } from "../EditBooks/EditBooks"
-import { MemberBooks } from "../Members/memberBooks"
-import { Members } from "../Members/Members"
-import { MyBooks } from "../MyBooks/MyBooks"
+import { MemberBooksContainer } from "../Members/memberBooksContainer"
+import { MembersContainer } from "../Members/MembersContainer"
+import { MyBooksContainer } from "../MyBooks/MyBooksContainer"
 
 
 
@@ -21,14 +21,14 @@ export const MemberViews = () => {
 					<Outlet />
 				</>
 			}>
-				<Route path="myBooks" element={ <MyBooks />  } />
+				<Route path="myBooks" element={ <MyBooksContainer />  } />
 				<Route path="updateBook/:ownedBookId" element={ <EditBooks />  } />
 				<Route path="addBook" element={ <AddBook />  } />
-				<Route path="members" element={ <Members />  } />
-				<Route path="memberBooks/:userId" element={ <MemberBooks />  } />
-				<Route path="bayportBazaar" element={ <BazaarContainer />  } />
-				<Route path="loanBooks" element={ <LoanBooks />  } />
-				<Route path="bookStatus" element={ <BookStatus />  } />
+				<Route path="members" element={ <MembersContainer />  } />
+				<Route path="memberBooks/:userId" element={ <MemberBooksContainer />  } />
+				<Route path="bazaarContainer" element={ <BazaarContainer />  } />
+				<Route path="loanBooksContainer" element={ <LoanBooksContainer />  } />
+				<Route path="bookStatus" element={ <BookStatusContainer />  } />
 
 
 

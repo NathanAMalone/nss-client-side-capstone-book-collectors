@@ -1,5 +1,6 @@
 export const BookSearch = ({ setterFunction }) => {
-    return (
+    return (<>
+
         <div>
             <input
                 onChange={
@@ -9,5 +10,6 @@ export const BookSearch = ({ setterFunction }) => {
                 }
             type="text" placeholder="Enter search terms" />
         </div>
+    </>
     )
 }
