@@ -8,6 +8,7 @@ import { EditBooks } from "../EditBooks/EditBooks"
 import { MemberBooksContainer } from "../Members/memberBooksContainer"
 import { MembersContainer } from "../Members/MembersContainer"
 import { MyBooksContainer } from "../MyBooks/MyBooksContainer"
+import { AddPicture } from "../MyBooks/AddPicture"
 import { NewMember } from "../NewMember/NewMember"
 
 
@@ -33,6 +34,7 @@ export const AdminViews = () => {
 				<Route path="bazaarContainer" element={ <BazaarContainer />  } />
 				<Route path="loanBooksContainer" element={ <LoanBooksContainer />  } />
 				<Route path="bookStatus" element={ <BookStatusContainer />  } />
+				<Route path="pictureBooks/:ownedBookId" element={ <AddPicture />  } />
 
 
 

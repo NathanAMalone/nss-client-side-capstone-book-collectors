@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import "./AddBook.css"
+import Axios from 'axios'
 
 export const AddBook = () => {
-    
+
     // create an initial state objects with correct default properties
     const [book, updateBook] = useState({
         bookSeriesNameId: 0,
@@ -27,134 +28,165 @@ export const AddBook = () => {
         returnedDate: "",
         prevBorrowerName: ""
     })
-    
+
     // get array of all books; get all series names and set id in variable
     const [arrayBooks, setArrayBooks] = useState([])
     const [bookSeriesNames, setBookSeriesNames] = useState([])
     const [bookSeriesId, setBookSeriesId] = useState(0)
+    // const [imageUpload, setImageUpload] = useState("")
+    // const [bookImage, setBookImage] = useState("")
+
     const navigate = useNavigate()
     const localBookUser = localStorage.getItem("book_user")
     const bookUserObject = JSON.parse(localBookUser)
-
+    
     const newDate = new Date()
-    const month = newDate.getUTCMonth() +1
+    const month = newDate.getUTCMonth() + 1
     const date = newDate.getUTCDate()
     const year = newDate.getUTCFullYear()
-    const today =  year + "-" + month + "-" + date
+    const today = year + "-" + month + "-" + date
+    
+    // const uploadImage = () => {
+        //     const formData = new FormData()
+        //     formData.append("file", imageUpload)
+        //     formData.append("upload_preset", "woxu5igj")
+        
+            // return Axios.post("https://api.cloudinary.com/v1_1/diyercxq0/image/upload", formData)
+        
+        
+        // }
+        // uploadImage() 
+        // .then((response) => {
+            //    console.log(response)
+    //    setBookImage(response.data.url)
+        // })
 
-    useEffect (() => {
+    
+
+    useEffect(() => {
         fetch(`http://localhost:8088/books`)
-        .then(response => response.json())
-        .then((booksArray) => {
-            setArrayBooks(booksArray)
-        })
-    },[]
+            .then(response => response.json())
+            .then((booksArray) => {
+                setArrayBooks(booksArray)
+            })
+    }, []
     )
-    
-    
-    useEffect (() => {
+
+
+    useEffect(() => {
         fetch(`http://localhost:8088/bookSeriesnames`)
-        .then(response => response.json())
-        .then((bookSeriesArray) => {
-            setBookSeriesNames(bookSeriesArray)
-        })
-    },[]
+            .then(response => response.json())
+            .then((bookSeriesArray) => {
+                setBookSeriesNames(bookSeriesArray)
+            })
+    }, []
     )
-    
+
+                    // <fieldset>
+                    //     <div className="formGroup">
+                    //         <label htmlFor="addBookImage">Upload a Book Image: </label>
+                    //         <input type="file"
+                    //             onChange={(evt) => {
+                    //                 setImageUpload(evt.target.files[0])
+                    //             }} />
+                    //     </div>
+                    // </fieldset>
+
     // create booksToAPI and ownedBooksToAPI
-        // if booksToAPI: bookSeriesNameId, bookName, bookAuthor, publicationDate === maps.books(book.etc), 
-        // then do nothing, else post to books
+    // if booksToAPI: bookSeriesNameId, bookName, bookAuthor, publicationDate === maps.books(book.etc), 
+    // then do nothing, else post to books
     // ownedBooksToAPI post to ownedBooks
-        // if booksToAPI: bookSeriesNameId, bookName, bookAuthor, publicationDate === maps.books(book.etc), 
-        // then ownedBook.bookId: book.id else ownedBook.bookId = parsedResponse.id
-        const handleSaveButtonClick = (event) => {
-            event.preventDefault()
-    
+    // if booksToAPI: bookSeriesNameId, bookName, bookAuthor, publicationDate === maps.books(book.etc), 
+    // then ownedBook.bookId: book.id else ownedBook.bookId = parsedResponse.id
+    const handleSaveButtonClick = (event) => {
+        event.preventDefault()
+        
         {
-            if (bookSeriesId !== 0 && 
-                book.bookName !== "" &&
+            
+                if (bookSeriesId !== 0 &&
+                    book.bookName !== "" &&
                 book.bookAuthor !== "" &&
                 ownedBook.bookThoughts !== "" &&
                 book.publicationDate &&
                 !isNaN(book.publicationDate) &&
-                book.publicationDate !== 0) {  
+                book.publicationDate !== 0) {
 
-            const ownedBookToSendToAPI = {
-                bookThoughts: ownedBook.bookThoughts,
-                dustJacket: ownedBook.dustJacket,
-                userId: bookUserObject.id,
-                ableToLoan: false,
-                ableToLoanDate: today,
-                isClaimed: false,
-                isClaimedDate: ownedBook.isClaimedDate,
-                bookImage: ownedBook.bookImage,
-                borrowerName: ownedBook.borrowerName,
-                approved: ownedBook.approved,
-                approvedDate: ownedBook.approvedDate,
-                returnedDate: ownedBook.returnedDate,
-                prevBorrowerName: ownedBook.prevBorrowerName
-            }
-        
-            const bookToSendToAPI = {
-                bookSeriesNameId: bookSeriesId,
-                bookName: book.bookName,
-                bookAuthor: book.bookAuthor,
-                publicationDate: book.publicationDate
-            }
-        const foundBook = arrayBooks.find((arrayBook) => {
-            if(arrayBook.bookSeriesNameId === bookSeriesId &&
-               arrayBook.bookName === book.bookName &&
-               arrayBook.bookAuthor === book.bookAuthor &&
-               arrayBook.publicationDate === book.publicationDate) {
-                    return true
-               }
-        })
-            if (foundBook) {
-                ownedBookToSendToAPI.bookId = foundBook.id
+                const ownedBookToSendToAPI = {
+                    bookThoughts: ownedBook.bookThoughts,
+                    dustJacket: ownedBook.dustJacket,
+                    userId: bookUserObject.id,
+                    ableToLoan: false,
+                    ableToLoanDate: today,
+                    isClaimed: false,
+                    isClaimedDate: ownedBook.isClaimedDate,
+                    bookImage: ownedBook.bookImage,
+                    borrowerName: ownedBook.borrowerName,
+                    approved: ownedBook.approved,
+                    approvedDate: ownedBook.approvedDate,
+                    returnedDate: ownedBook.returnedDate,
+                    prevBorrowerName: ownedBook.prevBorrowerName
+                }
+
+                const bookToSendToAPI = {
+                    bookSeriesNameId: bookSeriesId,
+                    bookName: book.bookName,
+                    bookAuthor: book.bookAuthor,
+                    publicationDate: book.publicationDate
+                }
+                const foundBook = arrayBooks.find((arrayBook) => {
+                    if (arrayBook.bookSeriesNameId === bookSeriesId &&
+                        arrayBook.bookName === book.bookName &&
+                        arrayBook.bookAuthor === book.bookAuthor &&
+                        arrayBook.publicationDate === book.publicationDate) {
+                        return true
+                    }
+                })
+                if (foundBook) {
+                    ownedBookToSendToAPI.bookId = foundBook.id
                     return fetch(`http://localhost:8088/ownedBooks/`, {
-                            method: "POST",
-                            headers: {
-                                "Content-type": "application/json"
-                            },
-                            body: JSON.stringify(ownedBookToSendToAPI)
+                        method: "POST",
+                        headers: {
+                            "Content-type": "application/json"
+                        },
+                        body: JSON.stringify(ownedBookToSendToAPI)
+                    })
+                        .then(response => response.json())
+                        .then(() => {
+                            navigate("/myBooks")
                         })
-                            .then(response => response.json())
-                            .then(() => {
-                                navigate("/myBooks")
-                            }) 
-               } else {
-                     fetch(`http://localhost:8088/books/`, {
+                    } else {
+                    fetch(`http://localhost:8088/books/`, {
                         method: "POST",
                         headers: {
                             "Content-type": "application/json"
                         },
                         body: JSON.stringify(bookToSendToAPI)
                     })
-                        .then(response => response.json())
-                        .then(parsedResponse => {
-                            ownedBookToSendToAPI.bookId = parsedResponse.id
-                            return fetch(`http://localhost:8088/ownedBooks/`, {
-                                method: "POST",
-                                headers: {
-                                    "Content-type": "application/json"
-                                },
-                                body: JSON.stringify(ownedBookToSendToAPI)
+                    .then(response => response.json())
+                    .then(parsedResponse => {
+                        ownedBookToSendToAPI.bookId = parsedResponse.id
+                        return fetch(`http://localhost:8088/ownedBooks/`, {
+                            method: "POST",
+                            headers: {
+                                "Content-type": "application/json"
+                            },
+                            body: JSON.stringify(ownedBookToSendToAPI)
                             })
-                            .then(response => response.json())
-                            .then(() => {
-                                navigate("/myBooks")
-                            })
+                                .then(response => response.json())
+                                .then(() => {
+                                    navigate("/myBooks")
+                                })
                         })
 
-               }
+                }
             } else {
                 window.alert(`Make sure to fill out all fields!`)
             }
         }
-            
-        
-        }
 
+
+    }
+    
     // create form for new book added
     return <>
         <form className="newBookForm">
@@ -188,7 +220,7 @@ export const AddBook = () => {
                         placeholder="Title"
                         value={book.bookName}
                         onChange={(evt) => {
-                            const copy = {...book}
+                            const copy = { ...book }
                             copy.bookName = evt.target.value
                             updateBook(copy)
                         }}
@@ -204,7 +236,7 @@ export const AddBook = () => {
                         placeholder="Author"
                         value={book.bookAuthor}
                         onChange={(evt) => {
-                            const copy = {...book}
+                            const copy = { ...book }
                             copy.bookAuthor = evt.target.value
                             updateBook(copy)
                         }}
@@ -220,7 +252,7 @@ export const AddBook = () => {
                         placeholder="Thoughts..."
                         value={ownedBook.bookThoughts}
                         onChange={(evt) => {
-                            const copy = {...ownedBook}
+                            const copy = { ...ownedBook }
                             copy.bookThoughts = evt.target.value
                             updateOwnedBook(copy)
                         }}
@@ -235,7 +267,7 @@ export const AddBook = () => {
                         className="addPublication"
                         value={book.publicationDate}
                         onChange={(evt) => {
-                            const copy = {...book}
+                            const copy = { ...book }
                             copy.publicationDate = parseInt(evt.target.value)
                             updateBook(copy)
                         }}
@@ -250,30 +282,14 @@ export const AddBook = () => {
                         className="addDustJacket"
                         value={ownedBook.dustJacket}
                         onChange={(evt) => {
-                            const copy = {...ownedBook}
+                            const copy = { ...ownedBook }
                             copy.dustJacket = evt.target.checked
                             updateOwnedBook(copy)
                         }}
                     />
                 </div>
             </fieldset>
-            <fieldset>
-                <div className="formGroup">
-                    <label htmlFor="addBookImage">Upload a Book Image: </label>
-                    <input
-                        type="file"
-                        name="image"
-                        className="addImage"
-                        value={ownedBook.bookImage}
-                        onChange={(evt) => {
-                            const copy = {...ownedBook}
-                            copy.bookImage = evt.target.value
-                            updateOwnedBook(copy)
-                        }}
-                    />
-                </div>
-            </fieldset>
-            <button 
+            <button
                 onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
                 className="btn btn-primary">
                 Add Book
