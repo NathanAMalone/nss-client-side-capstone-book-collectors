@@ -44,8 +44,7 @@ export const Members = ({ searchTermState}) => {
         [ searchTermState, users ]
     )
             
-    return <>
-        <article className="members">
+    return <article className="members">
             {
                 filteredUsers.map((filteredUser) => {
                     return <>
@@ -78,5 +77,5 @@ export const Members = ({ searchTermState}) => {
                 })
             }
         </article>
-    </>
+    
 }

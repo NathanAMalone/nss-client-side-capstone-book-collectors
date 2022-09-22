@@ -13,6 +13,6 @@ export const BazaarContainer = () => {
             <Link to={`/loanBooksContainer`}>Manage your loaned books here!</Link>
         </h3>
         <BookSearch setterFunction={setSearchTerms}/>
-		<BayportBazaar searchTermState={searchTerms}/> 
+		    <BayportBazaar searchTermState={searchTerms}/> 
     </>
 }

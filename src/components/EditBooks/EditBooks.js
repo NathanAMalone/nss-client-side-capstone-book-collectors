@@ -45,21 +45,6 @@ export const EditBooks = () => {
         []
     )
 
-    // document.addEventListener(
-    //     "click",
-    //     (clickEvent) => {
-    //         const itemClicked = clickEvent.target
-    //         if (itemClicked.id.startsWith("saveButton")) {
-    
-    //             {
-    //                 if (bookSeriesId === 0) {
-    //                     window.alert(`Make sure to pick a Book Series from the dropdown menu! `)
-    //                 } 
-    //             }
-    //         }
-    //     }
-    // )
-
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
 
