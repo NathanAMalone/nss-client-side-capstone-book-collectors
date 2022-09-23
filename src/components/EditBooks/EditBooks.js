@@ -61,11 +61,11 @@ export const EditBooks = () => {
                     dustJacket: ownedBookData.dustJacket,
                     bookId: ownedBookData.bookId,
                     userId: ownedBookData.userId,
-                    ableToLoan: false,
+                    ableToLoan: ownedBookData.ableToLoan,
                     ableToLoanDate: ownedBookData.ableToLoanDate,
-                    isClaimed: false,
+                    isClaimed: ownedBookData.isClaimed,
                     isClaimedDate: ownedBookData.isClaimedDate,
-                    bookImage: "",
+                    bookImage: ownedBookData.bookImage,
                     borrowerName: ownedBookData.borrowerName,
                     approved: ownedBookData.approved,
                     approvedDate: ownedBookData.approvedDate,
@@ -112,7 +112,7 @@ export const EditBooks = () => {
     return<>
 
         <form className="editBooksForm">
-            <h2 className="editFormTitle">Update Book Inormation</h2>
+            <h2 className="editFormTitle">Update Book Information</h2>
             <fieldset>
                 <div className="formGroup">
                     <label htmlFor="editFormSeries">Book Series:</label>

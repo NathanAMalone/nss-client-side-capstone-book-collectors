@@ -29,7 +29,7 @@ export const AddPicture = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        fetch(`http://localhost:8088/ownedBooks/${ownedBookId}`)
+        fetch(`http://localhost:8088/ownedBooks/${ownedBookId}?_expand=book`)
             .then(response => response.json())
             .then((singleBook) => {
                 setOwnedBook(singleBook)
@@ -59,9 +59,9 @@ export const AddPicture = () => {
                 dustJacket: ownedBook.dustJacket,
                 bookId: ownedBook.bookId,
                 userId: ownedBook.userId,
-                ableToLoan: false,
+                ableToLoan: ownedBook.ableToLoan,
                 ableToLoanDate: ownedBook.ableToLoanDate,
-                isClaimed: false,
+                isClaimed: ownedBook.isClaimed,
                 isClaimedDate: ownedBook.isClaimedDate,
                 bookImage: response.data.url,
                 borrowerName: ownedBook.borrowerName,
@@ -85,6 +85,7 @@ export const AddPicture = () => {
         })
     }
     return <form>
+        <h2>Adding a picture for {ownedBook?.book?.bookName}</h2>
         <fieldset>
             <div className="formGroup">
                 <label htmlFor="addBookImage">Upload a Book Image: </label>

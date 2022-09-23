@@ -89,8 +89,8 @@ export const BookStatus = ({ searchTermState }) => {
                             }
                             {
                                 (filteredSearchedBook.prevBorrowerName !== "" && filteredSearchedBook.returnedDate !== "")
-                                ?<div>
-                                  This book was last borrowed by {filteredSearchedBook.borrowerName} and returned on {filteredSearchedBook.returnedDate}.  
+                                ?<div className="statusDiv">
+                                    This book was last borrowed by {filteredSearchedBook.prevBorrowerName} and returned on {filteredSearchedBook.returnedDate}.  
                                 </div>
                                 :""
                             }

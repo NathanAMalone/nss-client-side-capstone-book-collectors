@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
+import { SeriesDropDown } from "../AllBooks/SeriesDropDown"
 import { BookSearch } from "../BayportBazaar/BookSearch"
 import { MemberBooks } from "./memberBooks"
 
@@ -9,6 +10,7 @@ export const MemberBooksContainer = () => {
     const {userId} = useParams()
     const [user, updateUser] = useState({})
     const [ownedBooks, setOwnedBooks] = useState([])
+    const [bookSeriesId, setBookSeriesId] = useState(0)
 
     const rendered = () => {
         fetch(`http://localhost:8088/ownedBooks?_expand=book`)
@@ -32,7 +34,9 @@ export const MemberBooksContainer = () => {
 
     return <>
         <h2>{user.fullName}'s Books</h2>
+            <SeriesDropDown setBookSeriesId={setBookSeriesId}/>
             <BookSearch setterFunction={setSearchTerms}/>
-		    <MemberBooks searchTermState={searchTerms}/> 
+		    <MemberBooks searchTermState={searchTerms}
+                bookSeriesId={bookSeriesId}/> 
     </>
 }

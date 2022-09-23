@@ -2,8 +2,8 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    justify-content: space-evenly;
-    max-width: 50%;
+    /* justify-content: space-evenly; */
+    /* max-width: 50%; */
     
 }
 
@@ -42,4 +42,12 @@
     font-size: larger;
     font-weight: 700;
     line-height: 3rem;
+}
+
+.cardImg{
+    display: block;
+    max-width:200px;
+    max-height:900px;
+    width: auto;
+    height: auto;
 }

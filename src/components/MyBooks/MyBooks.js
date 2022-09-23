@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import "./MyBooks.css"
 
 
-export const MyBooks = ({ searchTermState }) => {
+export const MyBooks = ({ searchTermState, bookSeriesId }) => {
     //user should see all of their books displayed
         //Need to fetch all booksOwned with expanded book information
         const [ownedBooks, setOwnedBooks] = useState([])
@@ -82,54 +82,56 @@ export const MyBooks = ({ searchTermState }) => {
                 {
                     filteredSearchedBooks.map(
                         (filteredSearchedBook) => {
-                            return bookSeriesNames.map(
-                                (bookSeriesName) => {
-                                    if(bookSeriesName.id === filteredSearchedBook.book.bookSeriesNameId){
-                                        return <section className="ownedBook" key={`ownedBook--${filteredSearchedBook.id}`}>
-                                                <header className="ownedBookHeader">
-                                                    Book Series: {bookSeriesName.bookSeries}
-                                                    
-                                                </header>
-                                                <section className="cardDetails">
-                                                    <div className="cardDiv">Book Title: {filteredSearchedBook.book.bookName}</div>
-                                                    <div className="cardDiv">Actual Author: {filteredSearchedBook.book.bookAuthor}</div>
-                                                    <div className="cardDiv">Your Toughts: {filteredSearchedBook.bookThoughts}</div>
-                                                    <div className="cardDiv">Year of Publication: {filteredSearchedBook.book.publicationDate}</div>
-                                                    <div className="cardDiv">Dustjacket: {filteredSearchedBook.dustJacket?"Yes":"No"}</div>
-                                                    {
-                                                        (filteredSearchedBook.bookImage === "")
-                                                        ?<Link to={`/pictureBooks/${filteredSearchedBook.id}`}>Add a Picture of your book here!</Link>
-                                                        :<img className="cardImg" src={filteredSearchedBook.bookImage}></img>
-                                                    }
-                                                </section>
-                                                <footer className="cardButtons">
-                                                    <button onClick={
-                                                        () => navigate(`/updateBook/${filteredSearchedBook.id}`)}
-                                                    className="btn btn-primary"
-                                                    key={`editButton--${filteredSearchedBook.id}`}>
-                                                        Edit Book
-                                                    </button>
-                                                    <button 
-                                                        onClick={(
-
-                                                        ) => fetch(
-                                                            `http://localhost:8088/ownedBooks/${filteredSearchedBook.id}`, {
-                                                                method: "DELETE",
-                                                            })
-                                                            .then(() => {
-                                                                getOwnedBooks()
-                                                            })
+                            if (filteredSearchedBook.book.bookSeriesNameId === bookSeriesId || bookSeriesId===0){
+                                return bookSeriesNames.map(
+                                    (bookSeriesName) => {
+                                        if(bookSeriesName.id === filteredSearchedBook.book.bookSeriesNameId){
+                                            return <section className="ownedBook" key={`ownedBook--${filteredSearchedBook.id}`}>
+                                                    <header className="ownedBookHeader">
+                                                        Book Series: {bookSeriesName.bookSeries}
+                                                        
+                                                    </header>
+                                                    <section className="cardDetails">
+                                                        <div className="cardDiv">Book Title: {filteredSearchedBook.book.bookName}</div>
+                                                        <div className="cardDiv">Actual Author: {filteredSearchedBook.book.bookAuthor}</div>
+                                                        <div className="cardDiv">Your Toughts: {filteredSearchedBook.bookThoughts}</div>
+                                                        <div className="cardDiv">Year of Publication: {filteredSearchedBook.book.publicationDate}</div>
+                                                        <div className="cardDiv">Dustjacket: {filteredSearchedBook.dustJacket?"Yes":"No"}</div>
+                                                        {
+                                                            (filteredSearchedBook.bookImage === "")
+                                                            ?<Link to={`/pictureBooks/${filteredSearchedBook.id}`}>Add a Picture of your book here!</Link>
+                                                            :<img className="cardImg" src={filteredSearchedBook.bookImage}></img>
                                                         }
+                                                    </section>
+                                                    <footer className="cardButtons">
+                                                        <button onClick={
+                                                            () => navigate(`/updateBook/${filteredSearchedBook.id}`)}
                                                         className="btn btn-primary"
-                                                        key={`deleteButton--${filteredSearchedBook.id}`}>
-                                                        Delete Book
-                                                    </button>
-                                                </footer>
-                                            </section>
-                                        
+                                                        key={`editButton--${filteredSearchedBook.id}`}>
+                                                            Edit Book
+                                                        </button>
+                                                        <button 
+                                                            onClick={(
+
+                                                            ) => fetch(
+                                                                `http://localhost:8088/ownedBooks/${filteredSearchedBook.id}`, {
+                                                                    method: "DELETE",
+                                                                })
+                                                                .then(() => {
+                                                                    getOwnedBooks()
+                                                                })
+                                                            }
+                                                            className="btn btn-primary"
+                                                            key={`deleteButton--${filteredSearchedBook.id}`}>
+                                                            Delete Book
+                                                        </button>
+                                                    </footer>
+                                                </section>
+                                            
+                                        }
                                     }
-                                }
-                            )
+                                )
+                            }
                         }
                     )
                 }
