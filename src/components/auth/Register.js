@@ -82,19 +82,11 @@ export const Register = (props) => {
                         placeholder="Membership Date" required />
                 </fieldset>
                 <fieldset>
-                    <input onChange={(evt) => {
-                        const copy = {...customer}
-                        copy.isStaff = evt.target.checked
-                        setCustomer(copy)
-                    }}
-                        type="checkbox" id="isAdmin" />
-                    <label htmlFor="email"> I am an Admin </label>
-                </fieldset>
-                <fieldset>
                     <button type="submit"> Register </button>
                 </fieldset>
             </form>
         </main>
     )
 }
+
 

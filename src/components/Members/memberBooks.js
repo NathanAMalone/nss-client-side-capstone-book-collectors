@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 
 
-export const MemberBooks = ({ searchTermState }) => {
+export const MemberBooks = ({ searchTermState, bookSeriesId }) => {
     //user should see all of their books displayed
         //Need to fetch all booksOwned with expanded book information
         const {userId} = useParams()
@@ -99,28 +99,31 @@ export const MemberBooks = ({ searchTermState }) => {
                 {
                     filteredSearchedBooks.map(
                         (filteredSearchedBook) => {
-                            return bookSeriesNames.map(
-                                (bookSeriesName) => {
-                                    if(bookSeriesName.id === filteredSearchedBook.book.bookSeriesNameId){
-                                        return <section className="ownedBook" key={`ownedBook--${filteredSearchedBook.id}`}>
-                                            <header className="ownedBookHeader">
-                                                Book Series: {bookSeriesName.bookSeries}
-                                                
-                                            </header>
-                                            <section className="cardDetails">
-                                                <div className="cardDiv">Book Title: {filteredSearchedBook.book.bookName}</div>
-                                                <div className="cardDiv">Actual Author: {filteredSearchedBook.book.bookAuthor}</div>
-                                                <div className="cardDiv">Your Toughts: {filteredSearchedBook.bookThoughts}</div>
-                                                <div className="cardDiv">Year of Publication: {filteredSearchedBook.book.publicationDate}</div>
-                                                <div className="cardDiv">Dustjacket: {filteredSearchedBook.dustJacket?"Yes":"No"}</div>
+                            if (filteredSearchedBook.book.bookSeriesNameId === bookSeriesId || bookSeriesId===0){
+                                return bookSeriesNames.map(
+                                    (bookSeriesName) => {
+                                        if(bookSeriesName.id === filteredSearchedBook.book.bookSeriesNameId){
+                                            return <section className="ownedBook" key={`ownedBook--${filteredSearchedBook.id}`}>
+                                                <header className="ownedBookHeader">
+                                                    Book Series: {bookSeriesName.bookSeries}
+                                                    
+                                                </header>
+                                                <section className="cardDetails">
+                                                    <div className="cardDiv">Book Title: {filteredSearchedBook.book.bookName}</div>
+                                                    <div className="cardDiv">Actual Author: {filteredSearchedBook.book.bookAuthor}</div>
+                                                    <div className="cardDiv">Your Toughts: {filteredSearchedBook.bookThoughts}</div>
+                                                    <div className="cardDiv">Year of Publication: {filteredSearchedBook.book.publicationDate}</div>
+                                                    <div className="cardDiv">Dustjacket: {filteredSearchedBook.dustJacket?"Yes":"No"}</div>
+                                                    <img className="cardImg" src={filteredSearchedBook.bookImage}></img>
+                                                </section>
                                             </section>
-                                        </section>
+                                        }
                                     }
-                                }
                                 )
                             }
-                            )
-                        }
+                        }    
+                    )
+                }
             </article>
         </>
 }

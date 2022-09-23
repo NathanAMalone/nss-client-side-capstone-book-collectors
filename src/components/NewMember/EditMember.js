@@ -1,10 +1,11 @@
-import { Link, useNavigate } from "react-router-dom"
-import { useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
+import { useEffect, useState } from "react"
 import "./NewMember.css"
 
-export const NewMember = () => {
+export const EditMember = () => {
     // create an initial state objects with correct default properties
-    const [newMember, updateNewMember] = useState({
+    const {userId} = useParams()
+    const [user, updateUser] = useState({
         fullName: "",
         email: "",
         membershipDate: "",
@@ -22,12 +23,19 @@ export const NewMember = () => {
     const getNewMember = () => {
         fetch(`http://localhost:8088/users`)
             .then(response => response.json())
-            .then((newMemberArray) => {
-                updateNewMember(newMemberArray)
-            })
             .then(navigate(`/members`))
     }
 
+    useEffect(
+        () => {
+            fetch(`http://localhost:8088/users/${userId}`)
+                .then(response => response.json())
+                .then((data) => {
+                    updateUser(data)
+                })
+        },
+        [userId]
+    )
 
     // create booksToAPI and ownedBooksToAPI
     // if booksToAPI: bookSeriesNameId, bookName, bookAuthor, publicationDate === maps.books(book.etc), 
@@ -38,20 +46,20 @@ export const NewMember = () => {
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
 
-        const newMemberToSendToAPI = {
-            fullName: newMember.fullName,
-            email: newMember.email,
-            membershipDate: today,
-            userAddress: newMember.userAddress,
-            isAdmin: newMember.isAdmin,
+        const userToSendToAPI = {
+            fullName: user.fullName,
+            email: user.email,
+            membershipDate: user.membershipDate,
+            userAddress: user.userAddress,
+            isAdmin: user.isAdmin,
         }
 
-            fetch(`http://localhost:8088/users`, {
-                method: "POST",
+            fetch(`http://localhost:8088/users/${userId}`, {
+                method: "PUT",
                 headers: {
                     "Content-type": "application/json"
                 },
-                body: JSON.stringify(newMemberToSendToAPI)
+                body: JSON.stringify(userToSendToAPI)
             })
                 .then(response => response.json())
                 .then(() => {
@@ -62,20 +70,19 @@ export const NewMember = () => {
     // create form for new book added
     return <>
         <form className="newMemberForm">
-        <Link to={`/members`}>Need to edit information? Go here.</Link>
-            <h2 className="newMemberFormTitle">Add new member!</h2>
+            <h2 className="newMemberFormTitle">Edit Current Member!</h2>
             <fieldset>
                 <div className="formGroup">
                 <label htmlFor="addFullName">Name:</label>
                     <input required autoFocus
                         type="text"
                         className="addNewMember"
-                        placeholder="New Member"
-                        value={newMember.fullName}
+                        placeholder="Current Member"
+                        value={user.fullName}
                         onChange={(evt) => {
-                            const copy = { ...newMember }
+                            const copy = { ...user }
                             copy.fullName = evt.target.value
-                            updateNewMember(copy)
+                            updateUser(copy)
                         }}
                     />
                 </div>
@@ -87,11 +94,11 @@ export const NewMember = () => {
                         type="text"
                         className="addEmail"
                         placeholder="Email"
-                        value={newMember.email}
+                        value={user.email}
                         onChange={(evt) => {
-                            const copy = { ...newMember }
+                            const copy = { ...user }
                             copy.email = evt.target.value
-                            updateNewMember(copy)
+                            updateUser(copy)
                         }}
                     />
                 </div>
@@ -103,11 +110,11 @@ export const NewMember = () => {
                         type="text"
                         className="addAddress"
                         placeholder="Address"
-                        value={newMember.userAddress}
+                        value={user.userAddress}
                         onChange={(evt) => {
-                            const copy = { ...newMember }
+                            const copy = { ...user }
                             copy.userAddress = evt.target.value
-                            updateNewMember(copy)
+                            updateUser(copy)
                         }}
                     />
                 </div>
@@ -118,11 +125,12 @@ export const NewMember = () => {
                     <input
                         type="checkbox"
                         className="addAdmin"
-                        value={newMember.isAdmin}
+                        value={user.isAdmin}
+                        checked={user.isAdmin}
                         onChange={(evt) => {
-                            const copy = { ...newMember }
+                            const copy = { ...user }
                             copy.isAdmin = evt.target.checked
-                            updateNewMember(copy)
+                            updateUser(copy)
                         }}
                     />
                 </div>
@@ -130,7 +138,7 @@ export const NewMember = () => {
             <button
                 onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
                 className="btn btn-primary">
-                Add New Member
+                Update Member
             </button>
         </form>
     </>

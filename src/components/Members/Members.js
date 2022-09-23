@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import "./Members.css"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 
 export const Members = ({ searchTermState}) => {
@@ -12,6 +12,7 @@ export const Members = ({ searchTermState}) => {
 
     const localBookUser = localStorage.getItem("book_user")
     const bookUserObject = JSON.parse(localBookUser)
+    const navigate = useNavigate()
 
     useEffect(
         () => {
@@ -47,33 +48,44 @@ export const Members = ({ searchTermState}) => {
     return <article className="members">
             {
                 filteredUsers.map((filteredUser) => {
-                    return <>
-                        <section className="memberCard" key={`member--${filteredUser.id}`}>
+                    return <section className="memberCard" key={`member--${filteredUser.id}`}>
                             <header className="memberHeader">
                                 <Link to={`/memberBooks/${filteredUser.id}`}>{filteredUser?.fullName}</Link>
                             </header>
                             <section className="memberCardSection">
                                 <div>Membership Date: {filteredUser?.membershipDate}</div>
                                 <div>Number of books owned: {filteredUser?.ownedBooks?.length}</div>
+                                {filteredUser.isAdmin
+                                ?<div>This member is an administrator.</div>
+                                :""
+                                }
                             </section>
                             {bookUserObject.isAdmin
-                            ?<button 
-                                onClick={(
-                                    
-                                    ) => fetch(
-                                        `http://localhost:8088/users/${filteredUser.id}`, {
-                                            method: "DELETE",
-                                        })
-                                        .then(() => {
-                                            getUsersRefresh()
-                                        })
-                                    }
-                                    className="btn btn-primary">
-                                Delete Member
-                            </button>
+                            ?<div className="memberButtons">
+                                <button onClick={
+                                    () => navigate(`/updateMember/${filteredUser.id}`)}
+                                className="btn btn-primary"
+                                key={`editButton--${filteredUser.id}`}>
+                                    Edit Member
+                                </button>
+                                <button 
+                                    onClick={(
+                                        
+                                        ) => fetch(
+                                            `http://localhost:8088/users/${filteredUser.id}`, {
+                                                method: "DELETE",
+                                            })
+                                            .then(() => {
+                                                getUsersRefresh()
+                                            })
+                                        }
+                                        className="btn btn-primary">
+                                    Delete Member
+                                </button>
+                            </div>
                             :""}
                         </section>
-                    </>
+
                 })
             }
         </article>

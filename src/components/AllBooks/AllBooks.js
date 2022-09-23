@@ -82,6 +82,7 @@ export const AllBooks = ({ searchTermState, bookSeriesId }) => {
                                                 <div className="cardDiv">Your Toughts: {filteredSearchedBook.bookThoughts}</div>
                                                 <div className="cardDiv">Year of Publication: {filteredSearchedBook.book.publicationDate}</div>
                                                 <div className="cardDiv">Dustjacket: {filteredSearchedBook.dustJacket ? "Yes" : "No"}</div>
+                                                <img className="cardImg" src={filteredSearchedBook.bookImage}></img>
                                             </section>
                                         </section>
                                     }
