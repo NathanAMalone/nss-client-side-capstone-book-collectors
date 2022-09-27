@@ -25,7 +25,6 @@ export const AddPicture = () => {
         prevBorrowerName: ""
     })
     const [imageUpload, setImageUpload] = useState("")
-    const [bookImage, setBookImage] = useState("")
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -52,7 +51,6 @@ export const AddPicture = () => {
         uploadImage() 
         .then((response) => {
             console.log(response)
-            setBookImage(response.data.url)
             
             const ownedBookToSendToAPI = {
                 bookThoughts: ownedBook.bookThoughts,

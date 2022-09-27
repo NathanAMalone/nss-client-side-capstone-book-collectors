@@ -1,4 +1,4 @@
-.newBookForm {
+.editBooksForm {
     border: 7px ridge rgb(17, 179, 17);
     border-radius: 2.5rem;
     padding: 5rem;
@@ -11,37 +11,22 @@
     width: 50rem;
 }
 
-.btn-primary {
-    background-color: rgb(196, 239, 253);
-    color: black;
-    box-shadow: -2px 2px 5px;
-}
-
-.btn-primary:hover{
-    background-color: rgb(167, 231, 252);
-    color: black;
-}
-
-.btn-primary:active {
-    background-color: rgb(145, 180, 192);
-}
-
-.bookSeriesLabel{
+.editSeriesLabel{
     padding-right: 1.5em;
 }
 
-.addTitle{
+.editTitle{
     width: 75%;
 }
 
-.addAuthor{
+.editAuthor{
     width: 75%;
 }
 
-.addThoughts{
+.editThoughts{
     width: 75%;
 }
 
-.addPublication{
+.editPublication{
     width: 89%;
 }

@@ -16,7 +16,7 @@ export const SeriesDropDown = ({ setBookSeriesId}) => {
 
     return<>
     <fieldset>
-      <div className="formGroup">
+      <div className="dropDown">
         <label htmlFor="addBookSeries">Book Series:</label>
         <select className="editDropDown"
           onChange={(evt) => {

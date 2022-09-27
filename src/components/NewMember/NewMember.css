@@ -10,3 +10,8 @@
     margin-right: auto;
     width: 50rem;
 }
+
+.formGroup {
+    display: flex;
+    justify-content: space-between;
+}

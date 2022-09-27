@@ -15,6 +15,7 @@
     margin: 0.5rem;
     display: flex;
     flex-direction: column;
+    background-color: red;
 }
 
 .cardDetails {
@@ -42,4 +43,15 @@
     font-size: larger;
     font-weight: 700;
     line-height: 3rem;
+}
+
+.dropDown{
+    background-color: red;
+    max-width: 50%;
+    margin: 0.5rem;
+    padding: 0.5rem;
+}
+
+.editDropDown{
+    
 }
