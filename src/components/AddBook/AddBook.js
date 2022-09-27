@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import "./AddBook.css"
-import Axios from 'axios'
+
+
 
 export const AddBook = () => {
 
@@ -193,8 +194,9 @@ export const AddBook = () => {
             <h2 className="newBookFormTitle">Add your new book!</h2>
             <fieldset>
                 <div className="formGroup">
-                    <label htmlFor="addBookSeries">Book Series:</label>
+                    <label htmlFor="addBookSeries" className="bookSeriesLabel">Book Series:</label>
                     <select className="editDropDown"
+                    
                         onChange={(evt) => {
                             setBookSeriesId(parseInt(evt.target.value))
                         }}
@@ -276,7 +278,7 @@ export const AddBook = () => {
             </fieldset>
             <fieldset>
                 <div className="formGroup">
-                    <label htmlFor="addBookDustJacket">Dust Jacket</label>
+                    <label htmlFor="addBookDustJacket">Dust Jacket?</label>
                     <input
                         type="checkbox"
                         className="addDustJacket"
@@ -289,7 +291,7 @@ export const AddBook = () => {
                     />
                 </div>
             </fieldset>
-            <button
+            <button 
                 onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
                 className="btn btn-primary">
                 Add Book

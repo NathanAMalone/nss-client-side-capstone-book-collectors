@@ -114,7 +114,7 @@ export const NewMember = () => {
             </fieldset>
             <fieldset>
                 <div className="formGroup">
-                    <label htmlFor="addAdmin">Make user an Admin?</label>
+                    <label htmlFor="addAdmin">Make user an Admin? </label>
                     <input
                         type="checkbox"
                         className="addAdmin"

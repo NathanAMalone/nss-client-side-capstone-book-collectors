@@ -7,6 +7,7 @@ import { Register } from "./auth/Register"
 import "./Collectors.css"
 
 
+
 export const Collectors = () => {
 	return <Routes>
 		<Route path="/login" element={<Login />} />

@@ -2,7 +2,15 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: left;
-     
+    background-color: rgb(10, 92, 10);
+}
+
+.navbar-brand{
+font-size: 36pt;
+}
+
+.nav-link{
+    font-size: 16pt;
 }
 
 .navbar__item {
@@ -12,5 +20,17 @@
 
 .navbar__logout {
     margin-left: auto;
+}
+
+.navbar__link{
+    color: rgb(194, 194, 194);
+    font-size: larger;
+    display: flex;
+    justify-content: end;
+    margin-right: 2rem;
+}
+
+.navbar__link:hover{
+color: white;
 }
 

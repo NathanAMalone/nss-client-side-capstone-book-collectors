@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import "./EditBooks.css"
 
 
 
@@ -115,7 +116,7 @@ export const EditBooks = () => {
             <h2 className="editFormTitle">Update Book Information</h2>
             <fieldset>
                 <div className="formGroup">
-                    <label htmlFor="editFormSeries">Book Series:</label>
+                    <label htmlFor="editFormSeries" className="editSeriesLabel">Book Series:</label>
                     <select className="editDropDown"
                         onChange={(evt) => {
                             setBookSeriesId(parseInt(evt.target.value))

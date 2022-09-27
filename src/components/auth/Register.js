@@ -3,12 +3,22 @@ import { useNavigate } from "react-router-dom"
 import "./Login.css"
 
 export const Register = (props) => {
+    
+    const newDate = new Date()
+    const month = newDate.getUTCMonth() + 1
+    const date = newDate.getUTCDate()
+    const year = newDate.getUTCFullYear()
+    const today = year + "-" + month + "-" + date
+
     const [customer, setCustomer] = useState({
-        email: "",
         fullName: "",
-        isStaff: false
+        email: "",
+        membershipDate: today,
+        userAddress: "",
+        isAdmin: false
     })
     let navigate = useNavigate()
+
 
     const registerNewUser = () => {
         return fetch("http://localhost:8088/users", {
@@ -21,12 +31,15 @@ export const Register = (props) => {
             .then(res => res.json())
             .then(createdUser => {
                 if (createdUser.hasOwnProperty("id")) {
-                    localStorage.setItem("honey_user", JSON.stringify({
-                        id: createdUser.id,
-                        staff: createdUser.isStaff
+                    localStorage.setItem("book_user", JSON.stringify({
+                        fullName: createdUser.fullName,
+                        email: createdUser.email,
+                        membershipDate: createdUser.membershipDate,
+                        userAddress: createdUser.userAddress,
+                        isAdmin: createdUser.isAdmin
                     }))
 
-                    navigate("/")
+                    navigate("/home")
                 }
             })
     }
@@ -48,7 +61,7 @@ export const Register = (props) => {
     }
 
     const updateCustomer = (evt) => {
-        const copy = {...customer}
+        const copy = { ...customer }
         copy[evt.target.id] = evt.target.value
         setCustomer(copy)
     }
@@ -60,8 +73,8 @@ export const Register = (props) => {
                 <fieldset>
                     <label htmlFor="fullName"> Full Name </label>
                     <input onChange={updateCustomer}
-                           type="text" id="fullName" className="form-control"
-                           placeholder="Enter your name" required autoFocus />
+                        type="text" id="fullName" className="form-control"
+                        placeholder="Enter your name" required autoFocus />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="email"> Email address </label>
@@ -72,14 +85,8 @@ export const Register = (props) => {
                 <fieldset>
                     <label htmlFor="address"> Address </label>
                     <input onChange={updateCustomer}
-                        type="text" id="address" className="form-control"
+                        type="text" id="userAddress" className="form-control"
                         placeholder="Address" required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="date"> Membership Date </label>
-                    <input onChange={updateCustomer}
-                        type="date" id="date" className="form-control"
-                        placeholder="Membership Date" required />
                 </fieldset>
                 <fieldset>
                     <button type="submit"> Register </button>
