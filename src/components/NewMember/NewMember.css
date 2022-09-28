@@ -1,5 +1,5 @@
 .newMemberForm {
-    border: 7px ridge lawngreen;
+    border: 7px ridge rgb(17, 179, 17);
     border-radius: 2.5rem;
     padding: 5rem;
     margin-top: 5rem;
@@ -9,9 +9,110 @@
     margin-left: auto;
     margin-right: auto;
     width: 50rem;
+    background-color: rgb(255, 255, 181);
+}
+
+.editMemberLink {
+    padding-bottom: 1rem;
+}
+
+.newMemberFormTitle {
+    color: darkred;
+    text-shadow: -2px 2px 5px rgb(165, 165, 125);
+}
+
+.editForm {
+    border: 7px ridge rgb(17, 179, 17);
+    border-radius: 2.5rem;
+    padding: 5rem;
+    margin-top: 5rem;
+    max-width: min-content;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50rem;
+    background-color: rgb(255, 255, 181);
+}
+
+.addNameLabel {
+    font-weight: 700;
+}
+
+.addEmailLabel {
+    font-weight: 700;
+}
+
+.addAddressLabel {
+    font-weight: 700;
+    padding-right: 1rem;
+}
+
+.addAdminLabel {
+    font-weight: 700;
+}
+
+.addFullName {
+    background-color: rgb(253, 253, 212);
+    border-radius: .5rem;   
+}
+
+.addEmail {
+    background-color: rgb(253, 253, 212);
+    border-radius: .5rem;   
+}
+
+.addAddress {
+    background-color: rgb(253, 253, 212);
+    border-radius: .5rem;   
+}
+
+.addAdmin {
+    accent-color: green; 
 }
 
 .formGroup {
     display: flex;
     justify-content: space-between;
+}
+
+.editMemberTitle {
+    color: darkred;
+    text-shadow: -2px 2px 5px rgb(165, 165, 125);
+}
+
+.editNameLabel {
+    font-weight: 700;
+}
+
+.editEmailLabel {
+    font-weight: 700;
+}
+
+.editAddressLabel {
+    font-weight: 700;
+    padding-right: 1rem;
+}
+
+.editAdminLabel {
+    font-weight: 700;
+}
+
+.editFullName {
+    background-color: rgb(253, 253, 212);
+    border-radius: .5rem;   
+}
+
+.editEmail {
+    background-color: rgb(253, 253, 212);
+    border-radius: .5rem;   
+}
+
+.editAddress {
+    background-color: rgb(253, 253, 212);
+    border-radius: .5rem;   
+}
+
+.editAdmin {
+    accent-color: green; 
 }

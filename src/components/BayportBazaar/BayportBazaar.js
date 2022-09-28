@@ -87,19 +87,25 @@ export const BayportBazaar = ({ searchTermState, bookSeriesId }) => {
                                         <header className="ownedBookHeader">
                                             Book Series: {bookSeriesName.bookSeries}
                                         </header>
-                                        <section className="availableDetails">
-                                            <div className="cardDiv">Book Title: {filteredOwnedBook.book.bookName}</div>
-                                            <div className="cardDiv">Actual Author: {filteredOwnedBook.book.bookAuthor}</div>
-                                            <div className="cardDiv">Your Toughts: {filteredOwnedBook.bookThoughts}</div>
-                                            <div className="cardDiv">Year of Publication: {filteredOwnedBook.book.publicationDate}</div>
-                                            <div className="cardDiv">Dustjacket: {filteredOwnedBook.dustJacket ? "Yes" : "No"}</div>
-                                            <div className="cardDiv">Owner: {filteredOwnedBook.user.fullName}</div>
-                                            <img className="cardImg" src={filteredOwnedBook.bookImage}></img>
+                                        <section className="loanedDetails">
+                                            <div className="loanedData">
+                                                <div className="cardDiv">Book Title: {filteredOwnedBook.book.bookName}</div>
+                                                <div className="cardDiv">Actual Author: {filteredOwnedBook.book.bookAuthor}</div>
+                                                <div className="cardDiv">Your Toughts: {filteredOwnedBook.bookThoughts}</div>
+                                                <div className="cardDiv">Year of Publication: {filteredOwnedBook.book.publicationDate}</div>
+                                                <div className="cardDiv">Dustjacket: {filteredOwnedBook.dustJacket ? "Yes" : "No"}</div>
+                                                <div className="cardDiv">Owner: {filteredOwnedBook.user.fullName}</div>
+                                            </div>
+                                            <div className="loanedImage">
+                                                <img className="cardImg" src={filteredOwnedBook.bookImage}></img>
+                                            </div>
                                         </section>
                                         <footer className="availableButtons">
                                             {
                                                 filteredOwnedBook.isClaimed
-                                                    ? `${filteredOwnedBook.borrowerName} would like to borrow this book.`
+                                                    ?<div className="footerMessage">
+                                                        {filteredOwnedBook.borrowerName} would like to borrow this book.
+                                                    </div> 
                                                     : <button
                                                         onClick={() => {
                                                             const borrowerToSendToAPI =

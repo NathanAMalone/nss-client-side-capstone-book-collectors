@@ -19,8 +19,8 @@ export const AdminViews = () => {
 		<Routes>
 			<Route path="/" element={
 				<>
-					<h1 className="title--main">Book Collectors Coterie</h1>
-					<div>A Juvenille Series Catalog</div>
+					{/* <h1 className="title--main">Book Collectors Coterie</h1>
+					<div>A Juvenille Series Catalog</div> */}
 
 					<Outlet />
 				</>

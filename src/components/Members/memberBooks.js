@@ -108,13 +108,17 @@ export const MemberBooks = ({ searchTermState, bookSeriesId }) => {
                                                     Book Series: {bookSeriesName.bookSeries}
                                                     
                                                 </header>
-                                                <section className="cardDetails">
-                                                    <div className="cardDiv">Book Title: {filteredSearchedBook.book.bookName}</div>
-                                                    <div className="cardDiv">Actual Author: {filteredSearchedBook.book.bookAuthor}</div>
-                                                    <div className="cardDiv">Your Toughts: {filteredSearchedBook.bookThoughts}</div>
-                                                    <div className="cardDiv">Year of Publication: {filteredSearchedBook.book.publicationDate}</div>
-                                                    <div className="cardDiv">Dustjacket: {filteredSearchedBook.dustJacket?"Yes":"No"}</div>
-                                                    <img className="cardImg" src={filteredSearchedBook.bookImage}></img>
+                                                <section className="memberDetails">
+                                                    <div className="memberData">
+                                                        <div className="cardDiv">Book Title: {filteredSearchedBook.book.bookName}</div>
+                                                        <div className="cardDiv">Actual Author: {filteredSearchedBook.book.bookAuthor}</div>
+                                                        <div className="cardDiv">Your Toughts: {filteredSearchedBook.bookThoughts}</div>
+                                                        <div className="cardDiv">Year of Publication: {filteredSearchedBook.book.publicationDate}</div>
+                                                        <div className="cardDiv">Dustjacket: {filteredSearchedBook.dustJacket?"Yes":"No"}</div>
+                                                    </div>
+                                                    <div className="memberImage">
+                                                        <img className="cardImg" src={filteredSearchedBook.bookImage}></img>
+                                                    </div>
                                                 </section>
                                             </section>
                                         }

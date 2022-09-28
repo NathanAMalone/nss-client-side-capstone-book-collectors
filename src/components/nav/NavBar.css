@@ -3,6 +3,8 @@
     flex-wrap: nowrap;
     justify-content: left;
     background-color: rgb(10, 92, 10);
+    width: 100%;
+    border-radius: 1rem;
 }
 
 .navbar-brand{
@@ -28,6 +30,7 @@ font-size: 36pt;
     display: flex;
     justify-content: end;
     margin-right: 2rem;
+    text-decoration: none;
 }
 
 .navbar__link:hover{

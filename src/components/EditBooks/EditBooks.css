@@ -9,24 +9,79 @@
     margin-left: auto;
     margin-right: auto;
     width: 50rem;
+    background-color: rgb(255, 255, 181);
+}
+
+.editFormTitle {
+    color: darkred;
+    text-shadow: -2px 2px 5px rgb(165, 165, 125);
+}
+
+.btn-primary {
+    background-color: rgb(196, 239, 253);
+    color: black;
+    box-shadow: -2px 2px 5px;
+}
+
+.btn-primary:hover{
+    background-color: rgb(167, 231, 252);
+    color: black;
+}
+
+.btn-primary:active {
+    background-color: rgb(145, 180, 192);
 }
 
 .editSeriesLabel{
     padding-right: 1.5em;
+    font-weight: 700;
+}
+
+.editTiteLabel{
+    font-weight: 700;
+}
+
+.editAuthorLabel {
+    font-weight: 700;
+}
+
+.editThoughtsLabel {
+    font-weight: 700;
+}
+
+.editPublicationLabel {
+    font-weight: 700;
+}
+
+.editDustJacketLabel {
+    font-weight: 700;
 }
 
 .editTitle{
     width: 75%;
+    background-color: rgb(253, 253, 212);
+    border-radius: .5rem;
 }
 
 .editAuthor{
     width: 75%;
+    background-color: rgb(253, 253, 212);
+    border-radius: .5rem;
 }
 
 .editThoughts{
     width: 75%;
+    background-color: rgb(253, 253, 212);
+    border-radius: .5rem;
 }
 
 .editPublication{
     width: 89%;
+    background-color: rgb(253, 253, 212);
+    border-radius: .5rem;
+}
+
+.editDustJacket {
+    accent-color: green;
+
 }

@@ -21,7 +21,7 @@ export const Login = () => {
                         fullName: user.fullName
                     }))
 
-                    navigate("/")
+                    navigate("/home")
                 }
                 else {
                     window.alert("Invalid login")

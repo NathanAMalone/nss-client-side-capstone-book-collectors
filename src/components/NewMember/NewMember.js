@@ -62,14 +62,14 @@ export const NewMember = () => {
     // create form for new book added
     return <>
         <form className="newMemberForm">
-        <Link to={`/members`}>Need to edit information? Go here.</Link>
+        <Link className="editMemberLink" to={`/members`}>Need to edit information? Go here.</Link>
             <h2 className="newMemberFormTitle">Add new member!</h2>
             <fieldset>
                 <div className="formGroup">
-                <label htmlFor="addFullName">Name:</label>
+                <label htmlFor="addFullName" className="addNameLabel">Name:</label>
                     <input required autoFocus
                         type="text"
-                        className="addNewMember"
+                        className="addFullName"
                         placeholder="New Member"
                         value={newMember.fullName}
                         onChange={(evt) => {
@@ -82,7 +82,7 @@ export const NewMember = () => {
             </fieldset>
             <fieldset>
                 <div className="formGroup">
-                    <label htmlFor="addEmail">Email:</label>
+                    <label htmlFor="addEmail" className="addEmailLabel">Email:</label>
                     <input
                         type="text"
                         className="addEmail"
@@ -98,7 +98,7 @@ export const NewMember = () => {
             </fieldset>
             <fieldset>
                 <div className="formGroup">
-                    <label htmlFor="addAddress">Address:</label>
+                    <label htmlFor="addAddress" className="addAddressLabel">Address:</label>
                     <input
                         type="text"
                         className="addAddress"
@@ -114,7 +114,7 @@ export const NewMember = () => {
             </fieldset>
             <fieldset>
                 <div className="formGroup">
-                    <label htmlFor="addAdmin">Make user an Admin? </label>
+                    <label htmlFor="addAdmin" className="addAdminLabel">Make user an Admin? </label>
                     <input
                         type="checkbox"
                         className="addAdmin"

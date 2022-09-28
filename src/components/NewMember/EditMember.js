@@ -69,14 +69,14 @@ export const EditMember = () => {
 
     // create form for new book added
     return <>
-        <form className="newMemberForm">
-            <h2 className="newMemberFormTitle">Edit Current Member!</h2>
+        <form className="editForm">
+            <h2 className="editMemberTitle">Edit Current Member!</h2>
             <fieldset>
                 <div className="formGroup">
-                <label htmlFor="addFullName">Name:</label>
+                <label htmlFor="editFullName" className="editNameLabel">Name:</label>
                     <input required autoFocus
                         type="text"
-                        className="addNewMember"
+                        className="editFullName"
                         placeholder="Current Member"
                         value={user.fullName}
                         onChange={(evt) => {
@@ -89,10 +89,10 @@ export const EditMember = () => {
             </fieldset>
             <fieldset>
                 <div className="formGroup">
-                    <label htmlFor="addEmail">Email:</label>
+                    <label htmlFor="editEmail" className="editEmailLabel">Email:</label>
                     <input
                         type="text"
-                        className="addEmail"
+                        className="editEmail"
                         placeholder="Email"
                         value={user.email}
                         onChange={(evt) => {
@@ -105,10 +105,10 @@ export const EditMember = () => {
             </fieldset>
             <fieldset>
                 <div className="formGroup">
-                    <label htmlFor="addAddress">Address:</label>
+                    <label htmlFor="editAddress" className="editAddressLabel">Address:</label>
                     <input
                         type="text"
-                        className="addAddress"
+                        className="editAddress"
                         placeholder="Address"
                         value={user.userAddress}
                         onChange={(evt) => {
@@ -121,10 +121,10 @@ export const EditMember = () => {
             </fieldset>
             <fieldset>
                 <div className="formGroup">
-                    <label htmlFor="addAdmin">Make user an Admin?</label>
+                    <label htmlFor="editAdmin" className="editAdminLabel">Make user an Admin?</label>
                     <input
                         type="checkbox"
-                        className="addAdmin"
+                        className="editAdmin"
                         value={user.isAdmin}
                         checked={user.isAdmin}
                         onChange={(evt) => {
