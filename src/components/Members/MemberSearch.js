@@ -1,7 +1,7 @@
-export const BookSearch = ({ setterFunction }) => {
+export const MemberSearch = ({ setterFunction }) => {
 
     return<>
-        <div className="searchBar">
+        <div className="searchMemberBar">
             <input
                 className="searchInput"
                 autoFocus

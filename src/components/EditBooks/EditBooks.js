@@ -139,7 +139,7 @@ export const EditBooks = () => {
             </fieldset>
             <fieldset>
                 <div className="formGroup">
-                    <label htmlFor="editFormTitle">Book Title:</label>
+                    <label htmlFor="editFormTitle" className="editTitleLabel">Book Title:</label>
                     <input required autoFocus
                         type="text"
                         className="editTitle"
@@ -156,7 +156,7 @@ export const EditBooks = () => {
             </fieldset>
             <fieldset>
                 <div className="formGroup">
-                    <label htmlFor="editFormAuthor">Actual Author:</label>
+                    <label htmlFor="editFormAuthor" className="editAuthorLabel">Actual Author:</label>
                     <input
                         type="text"
                         className="editAuthor"
@@ -173,7 +173,7 @@ export const EditBooks = () => {
             </fieldset>
             <fieldset>
                 <div className="formGroup">
-                    <label htmlFor="editFormThoughts">Your Thoughts:</label>
+                    <label htmlFor="editFormThoughts" className="editThoughtsLabel">Your Thoughts:</label>
                     <input
                         type="text"
                         className="editThoughts"
@@ -190,7 +190,7 @@ export const EditBooks = () => {
             </fieldset>
             <fieldset>
                 <div className="formGroup">
-                    <label htmlFor="editFormPublication">Year of Publication:</label>
+                    <label htmlFor="editFormPublication" className="editPublicationLabel">Year of Publication:</label>
                     <input
                         type="number"
                         className="editPublication"
@@ -209,7 +209,7 @@ export const EditBooks = () => {
             </fieldset>
             <fieldset>
                 <div className="formGroup">
-                    <label htmlFor="editFormDustJacket">Dust Jacket:</label>
+                    <label htmlFor="editFormDustJacket" className="editDustJacketLabel">Dust Jacket:</label>
                     <input
                         type="checkbox"
                         className="editDustJacket"

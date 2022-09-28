@@ -50,7 +50,7 @@ export const Members = ({ searchTermState}) => {
                 filteredUsers.map((filteredUser) => {
                     return <section className="memberCard" key={`member--${filteredUser.id}`}>
                             <header className="memberHeader">
-                                <Link to={`/memberBooks/${filteredUser.id}`}>{filteredUser?.fullName}</Link>
+                                <Link className="memberLink" to={`/memberBooks/${filteredUser.id}`}>{filteredUser?.fullName}</Link>
                             </header>
                             <section className="memberCardSection">
                                 <div>Membership Date: {filteredUser?.membershipDate}</div>

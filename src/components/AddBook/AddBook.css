@@ -9,6 +9,12 @@
     margin-left: auto;
     margin-right: auto;
     width: 50rem;
+    background-color: rgb(255, 255, 181);
+}
+
+.newBookFormTitle {
+    color: darkred;
+    text-shadow: -2px 2px 5px rgb(165, 165, 125);
 }
 
 .btn-primary {
@@ -28,20 +34,61 @@
 
 .bookSeriesLabel{
     padding-right: 1.5em;
+    font-weight: 700;
 }
 
-.addTitle{
+.bookTitleLabel {
+    font-weight: 700;
+}
+
+.authorLabel {
+    font-weight: 700;   
+}
+
+.thoughtsLabel {
+    font-weight: 700;
+}
+
+.publicationLabel {
+    font-weight: 700;
+}
+
+.dustJacketLabel {
+    font-weight: 700;
+}
+
+.editDropDown{
+    background-color: rgb(253, 253, 212);
+    border-radius: .5rem;   
+}
+
+.addTitle {
     width: 75%;
+    background-color: rgb(253, 253, 212);
+    border-radius: .5rem;
 }
 
-.addAuthor{
+.addAuthor {
     width: 75%;
+    background-color: rgb(253, 253, 212);
+    border-radius: .5rem;
 }
 
-.addThoughts{
+.addThoughts {
     width: 75%;
+    background-color: rgb(253, 253, 212);
+    border-radius: .5rem;
 }
 
-.addPublication{
+.addPublication {
     width: 89%;
+    background-color: rgb(253, 253, 212);
+    border-radius: .5rem;
 }
+
+.addDustJacket {
+     accent-color: green;
+
+}
+
+

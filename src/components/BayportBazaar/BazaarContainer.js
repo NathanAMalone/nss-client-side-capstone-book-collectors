@@ -3,20 +3,23 @@ import { Link } from "react-router-dom"
 import { SeriesDropDown } from "../AllBooks/SeriesDropDown"
 import { BayportBazaar } from "./BayportBazaar"
 import { BookSearch } from "./BookSearch"
+import "./BayportBazaar.css"
 
 
 export const BazaarContainer = () => {
     const [searchTerms, setSearchTerms] = useState("")
     const [bookSeriesId, setBookSeriesId] = useState(0)
 
-    return <>
-      <h2>Welcome to the Bayport Bazaar!</h2>
+    return <div className="bazaarContainer">
+        <h2 className="bazaarContainerHeader">Welcome to the Bayport Bazaar!</h2>
         <h3>
-            <Link to={`/loanBooksContainer`}>Manage your loaned books here!</Link>
+            <Link className="headerLink" to={`/loanBooksContainer`}>Manage your loaned books here!</Link>
         </h3>
-        <SeriesDropDown setBookSeriesId={setBookSeriesId}/>
-        <BookSearch setterFunction={setSearchTerms}/>
-		    <BayportBazaar searchTermState={searchTerms}
-            bookSeriesId={bookSeriesId}/> 
-    </>
+        <div className="allBazaar">
+          <SeriesDropDown setBookSeriesId={setBookSeriesId}/>
+          <BookSearch setterFunction={setSearchTerms}/>
+          <BayportBazaar searchTermState={searchTerms}
+              bookSeriesId={bookSeriesId}/> 
+        </div>
+      </div>
 }

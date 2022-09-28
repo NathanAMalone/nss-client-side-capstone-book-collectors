@@ -32,11 +32,13 @@ export const MemberBooksContainer = () => {
         [userId]
     )
 
-    return <>
-        <h2>{user.fullName}'s Books</h2>
+    return <div className="memberBooksContainer">
+        <h2 className="memberBooksContainerHeader">{user.fullName}'s Books</h2>
+        <div className="allMemberBooks">
             <SeriesDropDown setBookSeriesId={setBookSeriesId}/>
             <BookSearch setterFunction={setSearchTerms}/>
 		    <MemberBooks searchTermState={searchTerms}
                 bookSeriesId={bookSeriesId}/> 
-    </>
+        </div>
+    </div>
 }

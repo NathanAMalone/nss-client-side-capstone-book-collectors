@@ -1,3 +1,62 @@
+.allMembers {
+    max-width: min-content;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.memberBooksContainer {
+    max-width: min-content;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.memberBooksContainerHeader {
+    font-size: 36pt;
+    color: darkred;
+    text-shadow: -2px 2px 5px rgb(255, 255, 181);
+}
+
+.allMemberBooks {
+    background-color: rgb(255, 255, 181);
+    min-width: 50rem;
+}
+
+.memberContainerHeader {
+    font-size: 36pt;
+    color: darkred;
+    text-shadow: -2px 2px 5px rgb(255, 255, 181);
+}
+
+.memberDetails {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: lightblue;
+    padding: 1em;
+    border-radius: 1rem;
+    box-shadow: -2px 2px 5px; 
+}
+
+.memberData {
+    font-size: larger;
+    font-weight: 500;
+}
+
+.searchMembers {
+    background-color: rgb(255, 255, 181);
+    min-width: 50rem;
+
+}
+
+.searchMemberBar {
+    padding: 1rem 1rem .5rem .5rem;
+}
+
 .members {
     display: flex;
     flex-direction: column;
@@ -8,10 +67,12 @@
 
 .memberCard {
  
-    border: 8px double rgb(173, 105, 105);
+    border: 8px double rgb(145, 86, 86);
     color: black;
     padding: 0.5rem;
     margin: 0.5rem;
+    background-color: rgb(255, 255, 181);
+    min-width: 50rem;
 }
 
 .memberCardSection {
@@ -19,12 +80,18 @@
     font-style: oblique; 
     display: flex;
     flex-direction: column;
+    padding-bottom: 1rem;
+    font-size: 12pt;
 }
 
 .memberHeader {
-    font-size: larger;
+    font-size: 18pt;
     font-weight: 700;
     
+}
+
+.memberLink {
+    text-decoration: none;
 }
 
 .memberButtons {

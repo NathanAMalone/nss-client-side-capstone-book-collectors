@@ -1,3 +1,18 @@
+.allBooks{
+    max-width: min-content;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.allBooksHeader{
+    font-size: 36pt;
+    color: darkred;
+    text-shadow: -2px 2px 5px rgb(255, 255, 181);
+}
+
 .ownedBooks {
     display: flex;
     flex-direction: column;
@@ -15,16 +30,20 @@
     margin: 0.5rem;
     display: flex;
     flex-direction: column;
-    background-color: red;
+    background-color: rgb(255, 255, 181);
+    min-width: 50rem;
 }
 
 .cardDetails {
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
     background-color: lightblue;
     padding: 1em;
-    
+    border-radius: 1rem;
+    box-shadow: -2px 2px 5px;  
+     
     
 }
 
@@ -40,18 +59,36 @@
 }
 
 .ownedBookHeader {
-    font-size: larger;
-    font-weight: 700;
+    font-size: large;
+    font-weight:900;
     line-height: 3rem;
 }
 
 .dropDown{
-    background-color: red;
+    background-color: rgb(255, 255, 181);
     max-width: 50%;
     margin: 0.5rem;
     padding: 0.5rem;
+    border-radius: .5rem;
 }
 
 .editDropDown{
+    background-color: rgb(253, 253, 212);
+    border-radius: .5rem;
     
+}
+
+.cardImg {
+    display: block;
+    max-width:200px;
+    max-height:900px;
+    width: auto;
+    height: auto;
+    border-radius: .5rem;
+    box-shadow: -2px 2px 5px;  
+}
+
+.cardData {
+    font-size: larger;
+    font-weight: 500;
 }

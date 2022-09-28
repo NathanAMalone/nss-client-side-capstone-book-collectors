@@ -1,6 +1,7 @@
 import { useState } from "react"
-import { BookSearch } from "../BayportBazaar/BookSearch"
 import { Members } from "./Members"
+import { MemberSearch } from "./MemberSearch"
+import "./Members.css"
 
 
 
@@ -8,9 +9,11 @@ import { Members } from "./Members"
 export const MembersContainer = () => {
     const [searchTerms, setSearchTerms] = useState("")
     
-    return <>
-       <h2>Member Area</h2>
-        <BookSearch setterFunction={setSearchTerms}/>
-		<Members searchTermState={searchTerms}/> 
-    </>
+    return <div className="allMembers">
+        <h2 className="memberContainerHeader">Member Area</h2>
+        <div className="searchMembers">
+            <MemberSearch setterFunction={setSearchTerms}/>
+            <Members searchTermState={searchTerms}/> 
+        </div>
+    </div>
 }

@@ -107,19 +107,23 @@ export const LoanBooks = ({ searchTermState, bookSeriesId }) => {
                                                 Book Series: {bookSeriesName.bookSeries}
 
                                             </header>
-                                            <section className="cardDetails">
-                                                <div className="cardDiv">Book Title: {filteredSearchedBook.book.bookName}</div>
-                                                <div className="cardDiv">Actual Author: {filteredSearchedBook.book.bookAuthor}</div>
-                                                <div className="cardDiv">Your Toughts: {filteredSearchedBook.bookThoughts}</div>
-                                                <div className="cardDiv">Year of Publication: {filteredSearchedBook.book.publicationDate}</div>
-                                                <div className="cardDiv">Dustjacket: {filteredSearchedBook.dustJacket ? "Yes" : "No"}</div>
-                                                <img className="cardImg" src={filteredSearchedBook.bookImage}></img>
+                                            <section className="availDetails">
+                                                <div className="availData">
+                                                    <div className="cardDiv">Book Title: {filteredSearchedBook.book.bookName}</div>
+                                                    <div className="cardDiv">Actual Author: {filteredSearchedBook.book.bookAuthor}</div>
+                                                    <div className="cardDiv">Your Toughts: {filteredSearchedBook.bookThoughts}</div>
+                                                    <div className="cardDiv">Year of Publication: {filteredSearchedBook.book.publicationDate}</div>
+                                                    <div className="cardDiv">Dustjacket: {filteredSearchedBook.dustJacket ? "Yes" : "No"}</div>
+                                                </div>
+                                                <div className="availImage">
+                                                    <img className="cardImg" src={filteredSearchedBook.bookImage}></img>
+                                                </div>
                                             </section>
                                             <footer className="cardButtons">
                                                 {
                                                     filteredSearchedBook.approved
-                                                    ?<><div>`{filteredSearchedBook.borrowerName} has your book.`</div>
-                                                    <div>Has the book been returned?    
+                                                    ?<><div className="footerMessage">`{filteredSearchedBook.borrowerName} has your book.`</div>
+                                                    <div className="footerMessage">Has the book been returned?    
                                                         <button
                                                             onClick={() => {
                                                                 const approvalToSendToAPI = 
@@ -156,7 +160,7 @@ export const LoanBooks = ({ searchTermState, bookSeriesId }) => {
                                                     :<>{
                                                         !filteredSearchedBook.isClaimed
                                                         ?<>
-                                                        <div className="loanMessage">
+                                                        <div className="footerMessage">
                                                             {
                                                                 filteredSearchedBook.ableToLoan
                                                                 ?"Your book can be shared."
@@ -232,7 +236,7 @@ export const LoanBooks = ({ searchTermState, bookSeriesId }) => {
                                                         </button>
                                                         </>
                                                         :<>
-                                                        <div>Accept borrow request from {filteredSearchedBook.borrowerName}?</div>
+                                                        <div className="footerMessage">Accept borrow request from {filteredSearchedBook.borrowerName}?</div>
                                                         <button
                                                             onClick={() => {
                                                                 const approvalToSendToAPI = 

@@ -17,7 +17,7 @@ export const SeriesDropDown = ({ setBookSeriesId}) => {
     return<>
     <fieldset>
       <div className="dropDown">
-        <label htmlFor="addBookSeries">Book Series:</label>
+        <label htmlFor="addBookSeries" className="dropDownLabel">Choose Your Book Series:</label>
         <select className="editDropDown"
           onChange={(evt) => {
             setBookSeriesId(parseInt(evt.target.value))

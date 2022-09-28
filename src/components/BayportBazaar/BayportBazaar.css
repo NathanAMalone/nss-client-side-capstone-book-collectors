@@ -1,3 +1,27 @@
+.bazaarContainer {
+    max-width: min-content;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bazaarContainerHeader {
+    font-size: 36pt;
+    color: darkred;
+    text-shadow: -2px 2px 5px rgb(255, 255, 181);
+}
+
+.headerLink {
+    text-decoration: none;
+    color: blue;
+}
+
+.allBazaar {
+    background-color: rgb(255, 255, 181);
+    min-width: 50rem;
+}
+
 .bayportBazaar {
     display: flex;
     flex-direction: column;
@@ -5,6 +29,46 @@
     justify-content: space-evenly;
     max-width: 50%;
     
+}
+
+.allLoanContainer {
+    background-color: rgb(255, 255, 181);
+    min-width: 50rem;
+}
+
+.loanContainer {
+    max-width: min-content;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.loanHeaderLink {
+    text-decoration: none;
+    color: blue;
+}
+
+.loanContainerHeader {
+    font-size: 36pt;
+    color: darkred;
+    text-shadow: -2px 2px 5px rgb(255, 255, 181);
+}
+
+.availDetails {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: lightblue;
+    padding: 1em;
+    border-radius: 1rem;
+    box-shadow: -2px 2px 5px; 
+}
+
+.availData {
+    font-size: larger;
+    font-weight: 500;
 }
 
 .availableBooks {
@@ -15,16 +79,31 @@
     margin: 0.5rem;
     display: flex;
     flex-direction: column;
+    background-color: rgb(255, 255, 181);
+    min-width: 50rem;
 }
 
-.availableDetails {
+.loanedDetails {
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
     background-color: lightblue;
     padding: 1em;
+    border-radius: 1rem;
+    box-shadow: -2px 2px 5px; 
     
     
+}
+
+.footerMessage {
+    font-style: italic;
+    font-size: 12pt;
+}
+
+.loanedData {
+    font-size: larger;
+    font-weight: 500;
 }
 
 .cardDiv {
@@ -39,7 +118,7 @@
 }
 
 .ownedBookHeader {
-    font-size: larger;
-    font-weight: 700;
+    font-size: large;
+    font-weight:900;
     line-height: 3rem;
 }

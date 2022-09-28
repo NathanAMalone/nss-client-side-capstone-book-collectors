@@ -215,7 +215,7 @@ export const AddBook = () => {
             </fieldset>
             <fieldset>
                 <div className="formGroup">
-                    <label htmlFor="addBookTitle">Book Title: </label>
+                    <label htmlFor="addBookTitle" className="bookTitleLabel">Book Title: </label>
                     <input required autoFocus
                         type="text"
                         className="addTitle"
@@ -231,7 +231,7 @@ export const AddBook = () => {
             </fieldset>
             <fieldset>
                 <div className="formGroup">
-                    <label htmlFor="addAuthor">Actual Author: </label>
+                    <label htmlFor="addAuthor" className="authorLabel">Actual Author: </label>
                     <input
                         type="text"
                         className="addAuthor"
@@ -247,7 +247,7 @@ export const AddBook = () => {
             </fieldset>
             <fieldset>
                 <div className="formGroup">
-                    <label htmlFor="addBookThoughts">Your Thoughts: </label>
+                    <label htmlFor="addBookThoughts" className="thoughtsLabel">Your Thoughts: </label>
                     <input
                         type="text"
                         className="addThoughts"
@@ -263,7 +263,7 @@ export const AddBook = () => {
             </fieldset>
             <fieldset>
                 <div className="formGroup">
-                    <label htmlFor="addBookPublication">Year of Publication: </label>
+                    <label htmlFor="addBookPublication" className="publicationLabel">Year of Publication: </label>
                     <input
                         type="number"
                         className="addPublication"
@@ -278,7 +278,7 @@ export const AddBook = () => {
             </fieldset>
             <fieldset>
                 <div className="formGroup">
-                    <label htmlFor="addBookDustJacket">Dust Jacket?</label>
+                    <label htmlFor="addBookDustJacket" className="dustJacketLabel">Dust Jacket?</label>
                     <input
                         type="checkbox"
                         className="addDustJacket"
