@@ -9,6 +9,7 @@ import { MemberBooksContainer } from "../Members/memberBooksContainer"
 import { MembersContainer } from "../Members/MembersContainer"
 import { MyBooksContainer } from "../MyBooks/MyBooksContainer"
 import { AddPicture } from "../MyBooks/AddPicture"
+import { Home } from "../Home/Home"
 
 
 
@@ -33,7 +34,7 @@ export const MemberViews = () => {
 				<Route path="loanBooksContainer" element={ <LoanBooksContainer />  } />
 				<Route path="bookStatus" element={ <BookStatusContainer />  } />
 				<Route path="pictureBooks/:ownedBookId" element={ <AddPicture />  } />
-
+				<Route path="/home" element={ <Home />} />
 
 
 

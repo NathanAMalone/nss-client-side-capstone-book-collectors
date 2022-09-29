@@ -1,9 +1,9 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import "./Login.css"
 
 export const Register = (props) => {
-    
+
     const newDate = new Date()
     const month = newDate.getUTCMonth() + 1
     const date = newDate.getUTCDate()
@@ -70,28 +70,33 @@ export const Register = (props) => {
         <main style={{ textAlign: "center" }}>
             <form className="form--login" onSubmit={handleRegister}>
                 <h1 className="h3 mb-3 font-weight-normal">Please Register for Honey Rae Repairs</h1>
-                <fieldset>
-                    <label htmlFor="fullName"> Full Name </label>
-                    <input onChange={updateCustomer}
-                        type="text" id="fullName" className="form-control"
-                        placeholder="Enter your name" required autoFocus />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="email"> Email address </label>
-                    <input onChange={updateCustomer}
-                        type="email" id="email" className="form-control"
-                        placeholder="Email address" required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="address"> Address </label>
-                    <input onChange={updateCustomer}
-                        type="text" id="userAddress" className="form-control"
-                        placeholder="Address" required />
-                </fieldset>
-                <fieldset>
-                    <button type="submit"> Register </button>
-                </fieldset>
+                <div className="registerCard">
+                    <fieldset>
+                        <label htmlFor="fullName" className="fullNameLabel"> Full Name </label>
+                        <input onChange={updateCustomer}
+                            type="text" id="fullName" className="form-control"
+                            placeholder="Enter your name" required autoFocus />
+                    </fieldset>
+                    <fieldset>
+                        <label htmlFor="email" className="emailLabel"> Email address </label>
+                        <input onChange={updateCustomer}
+                            type="email" id="email" className="form-control"
+                            placeholder="Email address" required />
+                    </fieldset>
+                    <fieldset>
+                        <label htmlFor="address" className="addressLabel"> Address </label>
+                        <input onChange={updateCustomer}
+                            type="text" id="userAddress" className="form-control"
+                            placeholder="Address" required />
+                    </fieldset>
+                    <fieldset>
+                        <button className="loginButton" type="submit"> Register </button>
+                    </fieldset>
+                </div>
             </form>
+                <section className="link--register">
+                    <Link to="/login">Back to login.</Link>
+                </section>
         </main>
     )
 }

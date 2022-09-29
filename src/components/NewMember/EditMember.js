@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import "./NewMember.css"
 
@@ -70,6 +70,8 @@ export const EditMember = () => {
     // create form for new book added
     return <>
         <form className="editForm">
+        <Link className="addMemberLink" to={`/newMember`}>Need to add a member? Go here.</Link>
+
             <h2 className="editMemberTitle">Edit Current Member!</h2>
             <fieldset>
                 <div className="formGroup">
@@ -140,6 +142,7 @@ export const EditMember = () => {
                 className="btn btn-primary">
                 Update Member
             </button>
+            <Link className="listMemberLink" to={`/members`}>Go back to Member List.</Link>
         </form>
     </>
 

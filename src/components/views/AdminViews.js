@@ -11,6 +11,7 @@ import { MyBooksContainer } from "../MyBooks/MyBooksContainer"
 import { AddPicture } from "../MyBooks/AddPicture"
 import { NewMember } from "../NewMember/NewMember"
 import { EditMember } from "../NewMember/EditMember"
+import { Home } from "../Home/Home"
 
 
 
@@ -37,6 +38,7 @@ export const AdminViews = () => {
 				<Route path="bookStatus" element={ <BookStatusContainer />  } />
 				<Route path="pictureBooks/:ownedBookId" element={ <AddPicture />  } />
 				<Route path="updateMember/:userId" element={ <EditMember />  } />
+				<Route path="/home" element={ <Home />} />
 
 
 
