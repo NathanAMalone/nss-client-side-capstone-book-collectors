@@ -99,6 +99,14 @@
 .footerMessage {
     font-style: italic;
     font-size: 12pt;
+    display: flex;
+    flex-direction: row;
+}
+
+.footerQuestion {
+    font-style: italic;
+    font-size: 12pt;
+    padding-right: 1rem;
 }
 
 .loanedData {
