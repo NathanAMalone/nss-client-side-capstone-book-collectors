@@ -1,6 +1,7 @@
 import  Axios  from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import "./MyBooks.css"
 
 export const AddPicture = () => {
     //Use params to get ownedbook id
@@ -82,12 +83,14 @@ export const AddPicture = () => {
                         })
         })
     }
-    return <form>
-        <h2>Adding a picture for {ownedBook?.book?.bookName}</h2>
+    return <form className="addPictureForm">
+        <h2 className="addPictureHeader">Adding a picture for:</h2>
+        <h2 className="addPictureTitle"> {ownedBook?.book?.bookName}</h2>
         <fieldset>
             <div className="formGroup">
-                <label htmlFor="addBookImage">Upload a Book Image: </label>
+                <label htmlFor="addBookImage" className="addPictureLabel">Upload a Book Image: </label>
                 <input type="file"
+                    className="addPicture"
                     onChange={(evt) => {
                         setImageUpload(evt.target.files[0])
                     }} />

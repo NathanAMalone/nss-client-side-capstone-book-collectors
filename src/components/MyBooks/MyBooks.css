@@ -1,4 +1,4 @@
-.allMyBooks{
+.allMyBooks {
     max-width: min-content;
     display: flex;
     flex-direction: column;
@@ -6,24 +6,24 @@
     margin-right: auto;
 }
 
-.myBooksHeader{
+.myBooksHeader {
     font-size: 36pt;
     color: darkred;
     text-shadow: -2px 2px 5px rgb(255, 255, 181);
 }
 
-.searchBars{
+.searchBars {
     background-color: rgb(255, 255, 181);
     min-width: 50rem;
 }
 
-.searchBar{
+.searchBar {
     margin-left: 1rem;
     margin-top: -1rem;
     margin-bottom: 1rem;
 }
 
-.searchInput{
+.searchInput {
     background-color: rgb(253, 253, 212);
     border-radius: .5rem;
 }
@@ -80,7 +80,7 @@
     color: darkblue;
 }
 
-.cardImg{
+.cardImg {
     display: block;
     max-width:200px;
     max-height:900px;
@@ -101,7 +101,42 @@
     font-size: large;
 }
 
-.editDropDown{
+.editDropDown {
     background-color: rgb(253, 253, 212);
     border-radius: .5rem;   
+}
+
+.addPictureForm {
+    border: 7px ridge rgb(17, 179, 17);
+    border-radius: 2.5rem;
+    padding: 5rem;
+    margin-top: 5rem;
+    max-width: max-content;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50rem;
+    background-color: rgb(255, 255, 181);
+}
+
+.addPictureHeader {
+    color: darkred;
+    text-shadow: -2px 2px 5px rgb(165, 165, 125);
+}
+
+.addPictureTitle {
+    color: rgb(11, 11, 211);
+    text-shadow: -2px 2px 5px rgb(165, 165, 125);
+}
+
+.addPictureLabel {
+    font-weight: 900;
+    font-size: large;
+    padding-right: 1rem;
+}
+
+.addPicture {
+    font-weight: 700;
+    font-size: 1rem;
 }

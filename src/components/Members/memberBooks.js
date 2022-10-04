@@ -80,16 +80,7 @@ export const MemberBooks = ({ searchTermState, bookSeriesId }) => {
             setFiltered(searchedBooks)
         },
         [ searchTermState, filteredOwnedBooks ]
-    )
-
-        // const deleteButton = () => {
-        //         return fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
-        //             method: "DELETE",
-        //         })
-        //         .then(() => {
-        //             getOwnedBooks()
-        //         })
-        // }    
+    )  
 
         return <>
             <article className="ownedBooks">

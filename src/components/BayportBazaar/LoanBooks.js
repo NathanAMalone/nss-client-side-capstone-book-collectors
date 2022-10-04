@@ -80,15 +80,6 @@ export const LoanBooks = ({ searchTermState, bookSeriesId }) => {
         [ searchTermState, filteredOwnedBooks ]
     )
 
-    // const deleteButton = () => {
-    //         return fetch(`http://localhost:8088/ownedBooks/${filteredOwnedBook.id}`, {
-    //             method: "DELETE",
-    //         })
-    //         .then(() => {
-    //             getOwnedBooks()
-    //         })
-    // }    
-
     return <>
        
         <article className="ownedBooks">
@@ -123,7 +114,8 @@ export const LoanBooks = ({ searchTermState, bookSeriesId }) => {
                                                 {
                                                     filteredSearchedBook.approved
                                                     ?<><div className="footerMessage">`{filteredSearchedBook.borrowerName} has your book.`</div>
-                                                    <div className="footerMessage">Has the book been returned?    
+                                                    <div className="footerMessage">
+                                                        <div className="footerQuestion">Has the book been returned?</div>
                                                         <button
                                                             onClick={() => {
                                                                 const approvalToSendToAPI = 

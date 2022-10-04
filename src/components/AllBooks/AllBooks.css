@@ -4,13 +4,37 @@
     flex-direction: column;
     margin-left: auto;
     margin-right: auto;
-
+    
 }
 
 .allBooksHeader{
     font-size: 36pt;
     color: darkred;
     text-shadow: -2px 2px 5px rgb(255, 255, 181);
+}
+
+.searchBars{
+    background-color: rgb(255, 255, 181);
+    min-width: 50rem;
+}
+
+.dropDown{
+    background-color: rgb(255, 255, 181);
+    max-width: 50%;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border-radius: .5rem;
+}
+
+.dropDownLabel {
+    font-weight: 900;
+    font-size: large;
+}
+
+.editDropDown{
+    background-color: rgb(253, 253, 212);
+    border-radius: .5rem;
+    
 }
 
 .ownedBooks {
@@ -34,6 +58,12 @@
     min-width: 50rem;
 }
 
+.ownedBookHeader {
+    font-size: large;
+    font-weight:900;
+    line-height: 3rem;
+}
+
 .cardDetails {
     display: flex;
     flex-wrap: wrap;
@@ -43,39 +73,16 @@
     padding: 1em;
     border-radius: 1rem;
     box-shadow: -2px 2px 5px;  
-     
-    
+         
+}
+
+.cardData {
+    font-size: larger;
+    font-weight: 500;
 }
 
 .cardDiv {
     padding: .25rem;
-}
-.cardButtons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 1rem 0 0.25rem 0;
-    
-}
-
-.ownedBookHeader {
-    font-size: large;
-    font-weight:900;
-    line-height: 3rem;
-}
-
-.dropDown{
-    background-color: rgb(255, 255, 181);
-    max-width: 50%;
-    margin: 0.5rem;
-    padding: 0.5rem;
-    border-radius: .5rem;
-}
-
-.editDropDown{
-    background-color: rgb(253, 253, 212);
-    border-radius: .5rem;
-    
 }
 
 .cardImg {
@@ -88,7 +95,6 @@
     box-shadow: -2px 2px 5px;  
 }
 
-.cardData {
-    font-size: larger;
-    font-weight: 500;
-}
+
+
+

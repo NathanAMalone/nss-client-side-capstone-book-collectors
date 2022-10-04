@@ -34,8 +34,6 @@ export const AddBook = () => {
     const [arrayBooks, setArrayBooks] = useState([])
     const [bookSeriesNames, setBookSeriesNames] = useState([])
     const [bookSeriesId, setBookSeriesId] = useState(0)
-    // const [imageUpload, setImageUpload] = useState("")
-    // const [bookImage, setBookImage] = useState("")
 
     const navigate = useNavigate()
     const localBookUser = localStorage.getItem("book_user")
@@ -46,21 +44,6 @@ export const AddBook = () => {
     const date = newDate.getUTCDate()
     const year = newDate.getUTCFullYear()
     const today = year + "-" + month + "-" + date
-    
-    // const uploadImage = () => {
-        //     const formData = new FormData()
-        //     formData.append("file", imageUpload)
-        //     formData.append("upload_preset", "woxu5igj")
-        
-            // return Axios.post("https://api.cloudinary.com/v1_1/diyercxq0/image/upload", formData)
-        
-        
-        // }
-        // uploadImage() 
-        // .then((response) => {
-            //    console.log(response)
-    //    setBookImage(response.data.url)
-        // })
 
     
 
@@ -82,16 +65,6 @@ export const AddBook = () => {
             })
     }, []
     )
-
-                    // <fieldset>
-                    //     <div className="formGroup">
-                    //         <label htmlFor="addBookImage">Upload a Book Image: </label>
-                    //         <input type="file"
-                    //             onChange={(evt) => {
-                    //                 setImageUpload(evt.target.files[0])
-                    //             }} />
-                    //     </div>
-                    // </fieldset>
 
     // create booksToAPI and ownedBooksToAPI
     // if booksToAPI: bookSeriesNameId, bookName, bookAuthor, publicationDate === maps.books(book.etc), 
